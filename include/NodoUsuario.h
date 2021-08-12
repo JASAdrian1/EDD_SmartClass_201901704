@@ -6,6 +6,7 @@
 class NodoUsuario
 {
     public:
+        NodoUsuario(Usuarios usuario,NodoUsuario *anterior, NodoUsuario *siguiente);
         NodoUsuario();
         NodoUsuario *siguiente;
         NodoUsuario *anterior;
