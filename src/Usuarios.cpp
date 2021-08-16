@@ -6,6 +6,8 @@
 
 using namespace std;
 
+ListaUsuarios * listaUs = new ListaUsuarios();
+
 Usuarios::Usuarios(string id, string dpi, string nombre, string carrera, string correo, string password, string creditos, string edad)
 {
     this->id = id;
@@ -25,7 +27,7 @@ Usuarios::Usuarios()
 }
 
 void Usuarios::cargarUsuarios(){
-    ListaUsuarios *listaUs = new ListaUsuarios();
+
     ifstream archivo;
     string ruta;
     cout<<"Ingrese la ruta del archivo: ";
@@ -92,6 +94,7 @@ void Usuarios::cargarUsuarios(){
                     contador+=1;
 
                 }
+                correo = linea.substr(start, endS - start);
                 Usuarios *usuario = new Usuarios(id,dpi,nombre,carrera,correo,password,creditos,edad);
                 listaUs->insertar(usuario);
             }
@@ -129,6 +132,25 @@ void Usuarios::insertarUsuario(){
     cout<<"Ingrese los creditos: "<<endl;  cin >> creditos;
     cout<<"Ingrese la edad: "<<endl;  cin >> edad;
     Usuarios *nuevoUsuario = new Usuarios(id,dpi,nombre,carrera,correo,password,creditos,edad);
+    listaUs->insertar(nuevoUsuario);
+    listaUs->imprimirUsuarios();
+}
+
+
+void Usuarios::modificarUsuario(){
+    string dpi = "";
+    cout<<"Ingrese el DPI del usuario al que desea modificar la informacion: "<<endl;
+    cin >> dpi;
+    listaUs->modificarUsuario(dpi);
+}
+
+void Usuarios::eliminarUsuario(){
+    if(listaUs!=nullptr){
+        string dpi = "";
+        cout<<"Ingrese el DPI del usuario al que desea modificar la informacion: "<<endl;
+        cin >> dpi;
+        listaUs->eliminarUsuario(dpi);
+    }
 
 }
 

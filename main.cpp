@@ -45,6 +45,10 @@ void menu(){
                 cin >> opcionUsuarios;
                 if(opcionUsuarios == "1"){
                     Usuarios::insertarUsuario();
+                }else if(opcionUsuarios == "2"){
+                    Usuarios::modificarUsuario();
+                }else if(opcionUsuarios == "3"){
+                    Usuarios::eliminarUsuario();
                 }
             }
 
