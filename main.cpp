@@ -2,6 +2,9 @@
 #include<Usuarios.h>
 #include<string>
 #include<conio.h>
+#include<Usuarios.h>
+#include<Tarea.h>
+#include<Error.h>
 
 using namespace std;
 
@@ -15,6 +18,8 @@ int main()
 
 
 void menu(){
+    Usuarios *usuarios = new Usuarios();
+    Tarea *tareas = new Tarea();
     string opcion ="";
     while (opcion !="5"){
         printf("Menu");
@@ -26,7 +31,11 @@ void menu(){
         printf("\nIngrese el numero de la opcion a la que desea ingresar: ");
         cin>>opcion;
         if(opcion == "1"){
-            Usuarios::cargarUsuarios();
+            usuarios->cargarUsuarios();
+
+        }else if(opcion == "2"){
+            tareas->cargarTareas();
+
         }else if(opcion == "3"){
             string opcionSub ="";
             cout<<"1. Usuarios"<<endl;
@@ -44,12 +53,28 @@ void menu(){
                 printf("Ingrese el numero de la opcion que desea ejecutar: ");
                 cin >> opcionUsuarios;
                 if(opcionUsuarios == "1"){
-                    Usuarios::insertarUsuario();
+                    usuarios->insertarUsuario();
                 }else if(opcionUsuarios == "2"){
-                    Usuarios::modificarUsuario();
+                    usuarios->modificarUsuario();
                 }else if(opcionUsuarios == "3"){
-                    Usuarios::eliminarUsuario();
+                    usuarios->eliminarUsuario();
                 }
+            }
+        //Opciones para los reportes
+        }else if(opcion == "4"){
+            string opcionReporte = "";
+            cout<<"1. Lista de estudiantes"<<endl;
+            cout<<"2. Lista de tareas linealizadas "<<endl;
+            cout<<"3. Busqueda en estructura linealizada"<<endl;
+            cout<<"4. Busqueda de posicion en lista linealizada"<<endl;
+            cout<<"5. Cola de errores"<<endl;
+            cout<<"6. Codigo generado de salida"<<endl;
+            cout<<"Ingrese el numero de la opcion que desea ejecutar"<<endl;
+            cin>>opcionReporte;
+            if(opcionReporte == "1"){
+                usuarios->graficarLista();
+            }else if(opcionReporte == "5"){
+                Error::graficarErrores();
             }
 
         }else if(opcion == "5"){
@@ -63,4 +88,3 @@ void menu(){
     }
 
 }
-

@@ -2,6 +2,7 @@
 #define LISTAUSUARIOS_H
 #include <NodoUsuario.h>
 #include<string>
+#include<ColaError.h>
 
 
 using namespace std;
@@ -18,6 +19,9 @@ class ListaUsuarios
         void modificarUsuario(string dpi);
         void eliminarUsuario(string dpi);
         void imprimirUsuarios();
+        void graficarLista();
+
+
 
         virtual ~ListaUsuarios();
 

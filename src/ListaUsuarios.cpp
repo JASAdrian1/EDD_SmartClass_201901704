@@ -2,6 +2,8 @@
 #include<iostream>
 #include<string>
 #include<conio.h>
+#include <fstream>
+
 
 using namespace std;
 
@@ -170,12 +172,20 @@ void ListaUsuarios::eliminarUsuario(string dpi){
             cout<<"¿Esta seguro que desea eliminar al usuario con DPI: "<<usuario->usuario.dpi<<"? (si/no)"<<endl;
             cin >>confirmacion;
             if(confirmacion=="si"){
-                NodoUsuario * auxSiguiente = usuario->siguiente;
-                NodoUsuario * auxAnterior = usuario->anterior;
-                auxSiguiente->anterior =auxAnterior;
-                auxAnterior->siguiente = auxSiguiente;
-                delete(usuario);
+                if(usuario == this->primero){
+                    this->primero = usuario->siguiente;
+                }else if(usuario == this->ultimo){
+                    this->ultimo = usuario->anterior;
+                }
+                else{
+                    NodoUsuario * auxSiguiente = usuario->siguiente;
+                    NodoUsuario * auxAnterior = usuario->anterior;
+                    auxSiguiente->anterior =auxAnterior;
+                    auxAnterior->siguiente = auxSiguiente;
+                }
                 cout<<"Se ha eliminado al usuario con DPI "<<usuario->usuario.dpi<<" exitosamente"<<endl;
+                delete(usuario);
+
                 getch();
                 this->imprimirUsuarios();
                 break;
@@ -189,6 +199,46 @@ void ListaUsuarios::eliminarUsuario(string dpi){
         }
     }else{
         cout<<"No se ha encontrado al usuario ingresado";
+    }
+}
+
+
+int contGraphError = 0;
+void ListaUsuarios::graficarLista(){
+    contGraphError+=1;
+    if(!this->listaVacia()){
+        ofstream fs("graficaListaEstudiantes"+to_string(contGraphError)+".dot");
+        fs<<"digraph g {"<<endl;
+        fs<<"rankdir=LR;"<<endl;
+        fs<<"node[shape=circle];"<<endl;
+        int contador = 0;
+        NodoUsuario *tmp = this->primero;
+        while(tmp->siguiente!=nullptr){
+            string info = "ID:"+tmp->usuario.id+"\nDPI: "+tmp->usuario.dpi+
+            "\nNombre: "+tmp->usuario.nombre+"\nCarrera: "+tmp->usuario.carrera+
+            +"\nPassword: "+tmp->usuario.password+"\nCreditos: "+tmp->usuario.creditos+
+            +"\nEdad: "+tmp->usuario.edad;
+            fs<<contador<<"[label=\""<<info<<"\"];"<<endl;
+            contador+=1;
+            tmp = tmp->siguiente;
+        }
+        //Se crea el ultimo nodo de la grafica
+        string info = "ID:"+tmp->usuario.id+"\nDPI: "+tmp->usuario.dpi+
+            "\nNombre: "+tmp->usuario.nombre+"\nCarrera: "+tmp->usuario.carrera+
+            +"\nPassword: "+tmp->usuario.password+"\nCreditos: "+tmp->usuario.creditos+
+            +"\nEdad: "+tmp->usuario.edad;
+        fs<<contador<<"[label=\""<<info<<"\"];"<<endl;
+
+        fs<<0<<"->"<<contador<<endl;
+        fs<<contador<<"->"<<0<<endl;
+        for(int i=0;i<contador;i++){
+            fs<<i<<"->"<<i+1<<endl;
+        }
+        fs<<"}"<<endl;
+        cout<<"Se ha creado la grafica exitosamente"<<endl;
+        getch();
+    }else{
+        cout<<"No se ha creado la grafica ya que la cola de errores se encuentra vacia"<<endl;
     }
 }
 

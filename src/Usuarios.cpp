@@ -3,6 +3,8 @@
 #include<fstream>
 #include<string>
 #include<ListaUsuarios.h>
+#include<Error.h>
+#include<regex>
 
 using namespace std;
 
@@ -54,38 +56,27 @@ void Usuarios::cargarUsuarios(){
             string edad = "";
             if(contEnc>0){
                 while (endS != -1) {
-                    /*cout << linea.substr(start, endS - start) << "----";
-                    cout<<contador<<endl;*/
                     switch(contador){
                         case 0:
-                            //cout<<linea.substr(start, endS - start)<<endl;
                             id = linea.substr(start, endS - start);
-                            //cout<<"Carnet: "<<id<<endl;
-
                             break;
                         case 1:
                             dpi = linea.substr(start, endS - start);
-                            //cout<<"DPI: "<<dpi<<endl;
                             break;
                         case 2:
                             nombre = linea.substr(start, endS - start);
-                            //cout<<"Nombre: "<<nombre<<endl;
                             break;
                         case 3:
                             carrera = linea.substr(start, endS - start);
-                            //cout<<"Carrera: "<<carrera<<endl;
                             break;
                         case 4:
                             password = linea.substr(start, endS - start);
-                            //cout<<"Password: "<<password<<endl;
                             break;
                         case 5:
                             creditos = linea.substr(start, endS - start);
-                            //cout<<"Creditos: "<<creditos<<endl;
                             break;
                         case 6:
                             edad = linea.substr(start, endS - start);
-                            //cout<<"Edad: "<<edad<<endl;
                             break;
 
                     }
@@ -97,14 +88,29 @@ void Usuarios::cargarUsuarios(){
                 correo = linea.substr(start, endS - start);
                 Usuarios *usuario = new Usuarios(id,dpi,nombre,carrera,correo,password,creditos,edad);
                 listaUs->insertar(usuario);
+                if((usuario->dpi).size()!=13){
+                    cout<<"DPI: "<<usuario->dpi<<" tamanio: "<<(usuario->dpi).size()<<endl;
+                    Error *err = new Error("Estudiante","Numero de digitos de dpi incorrecto",usuario);
+                    Error::insetarError(err);
+                }
+                cout<<(usuario->id).size()<<endl;
+                if((usuario->id).size()!=9){
+                    Error *err = new Error("Estudiante","Numero de digitos de carnet incorrecto",usuario);
+                    Error::insetarError(err);
+                }
+                if(!this->validarCorreo(usuario->correo)){
+                    Error *err = new Error("Estudiante","Formato de correo incorrecto",usuario);
+                    Error::insetarError(err);
+                }
             }
             contEnc+=1;
             //cout<<contador;
 
         }
         listaUs->imprimirUsuarios();
+        Error::imprimirColaError();
 
-        printf("Se ha cargado el archivo correctamente");
+        printf("Se ha cargado el archivo correctamente\n");
 
     }else{
         cout<<"No se ha encontrado el archivo"<<endl;
@@ -152,6 +158,17 @@ void Usuarios::eliminarUsuario(){
         listaUs->eliminarUsuario(dpi);
     }
 
+}
+
+bool Usuarios::validarCorreo(string correo){
+    const regex expReg("(\\w|\\.)+(@)\\w+(.org|.es|.com)");
+    //cout<<regex_match(correo,expReg)<<endl;
+    return regex_match(correo,expReg);
+}
+
+
+void Usuarios::graficarLista(){
+    listaUs->graficarLista();
 }
 
 Usuarios::~Usuarios()

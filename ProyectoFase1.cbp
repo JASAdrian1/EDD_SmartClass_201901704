@@ -34,12 +34,24 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/ColaError.h" />
+		<Unit filename="include/Error.h" />
 		<Unit filename="include/ListaUsuarios.h" />
+		<Unit filename="include/NodoError.h" />
+		<Unit filename="include/NodoTarea.h" />
 		<Unit filename="include/NodoUsuario.h" />
+		<Unit filename="include/Reporte.h" />
+		<Unit filename="include/Tarea.h" />
 		<Unit filename="include/Usuarios.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/ColaError.cpp" />
+		<Unit filename="src/Error.cpp" />
 		<Unit filename="src/ListaUsuarios.cpp" />
+		<Unit filename="src/NodoError.cpp" />
+		<Unit filename="src/NodoTarea.cpp" />
 		<Unit filename="src/NodoUsuario.cpp" />
+		<Unit filename="src/Reporte.cpp" />
+		<Unit filename="src/Tarea.cpp" />
 		<Unit filename="src/Usuarios.cpp" />
 		<Extensions />
 	</Project>

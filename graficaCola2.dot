@@ -1,0 +1,85 @@
+digraph g {
+rankdir=LR;
+node[shape=circle];
+0[label="ID:201700886
+DPI: 3502451230508
+Nombre: Emilia Miramontes
+Carrera: Ingeniería en Ciencias y Sistemas
+Password: roxodiciqi
+Creditos: 205
+Edad: 21"];
+1[label="ID:201501786
+DPI: 7249529279753
+Nombre: Juan Curiel
+Carrera: Ingeniería Industrial
+Password: zanolexima
+Creditos: 245
+Edad: 24"];
+2[label="ID:201822186
+DPI: 9298434863898
+Nombre: Eloisa Rincón
+Carrera: Ingeniería Civil
+Password: toqelijanu
+Creditos: 95
+Edad: 19"];
+3[label="ID:201901425
+DPI: 4131766125532
+Nombre: Bernardo Hinojosa
+Carrera: Ingeniería Mecánica
+Password: wosopumano
+Creditos: 100
+Edad: 20"];
+4[label="ID:201503186
+DPI: 8549191766348
+Nombre: Manuel Manzanares
+Carrera: Ingeniería Eléctrica
+Password: rejumudore
+Creditos: 226
+Edad: 24"];
+5[label="ID:201123146
+DPI: 9616636196552
+Nombre: Julia Corona
+Carrera: Ingeniería Electrónica
+Password: xojobavuji
+Creditos: 237
+Edad: 26"];
+6[label="ID:201704186
+DPI: 4778315315575
+Nombre: Berta Carrasco
+Carrera: Ingeniería Ambiental
+Password: gayahizatu
+Creditos: 210
+Edad: 22"];
+7[label="ID:202000786
+DPI: 7382344774121
+Nombre: Lola Delapaz
+Carrera: Ingeniería Química
+Password: hujocikimi
+Creditos: 45
+Edad: 19"];
+8[label="ID:201819852
+DPI: 3423442386382
+Nombre: Benjamín Asencio
+Carrera: Ingeniería Mecánica Eléctrica
+Password: runoqozepo
+Creditos: 117
+Edad: 20"];
+0->8
+8->0
+0->1
+1->0
+1->2
+2->1
+2->3
+3->2
+3->4
+4->3
+4->5
+5->4
+5->6
+6->5
+6->7
+7->6
+7->8
+8->7
+}

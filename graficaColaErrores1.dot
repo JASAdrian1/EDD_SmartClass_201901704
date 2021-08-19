@@ -1,0 +1,17 @@
+digraph g {
+rankdir=LR;
+node[shape=circle];
+0[label="ID:1
+Tipo: Estudiante
+Descripcion: Formato de correo incorrecto"];
+1[label="ID:2
+Tipo: Estudiante
+Descripcion: Formato de correo incorrecto"];
+2[label="ID:3
+Tipo: Estudiante
+Descripcion: Formato de correo incorrecto"];
+0->1
+1->0
+1->2
+2->1
+}
