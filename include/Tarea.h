@@ -11,6 +11,10 @@ class Tarea
         Tarea();
         Tarea(int mes, int dia, int hora, string carnet, string nombre, string descripcion, string materia, string fecha, string estado);
         void cargarTareas();
+        bool validarFormatoFehca(string fecha);
+        void graficarLista();
+        void busquedaLinealizada(int posicion);
+        string generarCodigoSalida();
         string id;
         string carnet;
         string nombre;

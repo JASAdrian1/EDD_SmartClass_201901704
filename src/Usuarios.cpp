@@ -5,6 +5,7 @@
 #include<ListaUsuarios.h>
 #include<Error.h>
 #include<regex>
+#include<conio.h>
 
 using namespace std;
 
@@ -89,11 +90,11 @@ void Usuarios::cargarUsuarios(){
                 Usuarios *usuario = new Usuarios(id,dpi,nombre,carrera,correo,password,creditos,edad);
                 listaUs->insertar(usuario);
                 if((usuario->dpi).size()!=13){
-                    cout<<"DPI: "<<usuario->dpi<<" tamanio: "<<(usuario->dpi).size()<<endl;
+                    //cout<<"DPI: "<<usuario->dpi<<" tamanio: "<<(usuario->dpi).size()<<endl;
                     Error *err = new Error("Estudiante","Numero de digitos de dpi incorrecto",usuario);
                     Error::insetarError(err);
                 }
-                cout<<(usuario->id).size()<<endl;
+                //cout<<(usuario->id).size()<<endl;
                 if((usuario->id).size()!=9){
                     Error *err = new Error("Estudiante","Numero de digitos de carnet incorrecto",usuario);
                     Error::insetarError(err);
@@ -107,13 +108,15 @@ void Usuarios::cargarUsuarios(){
             //cout<<contador;
 
         }
-        listaUs->imprimirUsuarios();
-        Error::imprimirColaError();
+        //listaUs->imprimirUsuarios();
+        //Error::imprimirColaError();
 
         printf("Se ha cargado el archivo correctamente\n");
+        getch();
 
     }else{
         cout<<"No se ha encontrado el archivo"<<endl;
+        getch();
     }
 
 
@@ -139,7 +142,7 @@ void Usuarios::insertarUsuario(){
     cout<<"Ingrese la edad: "<<endl;  cin >> edad;
     Usuarios *nuevoUsuario = new Usuarios(id,dpi,nombre,carrera,correo,password,creditos,edad);
     listaUs->insertar(nuevoUsuario);
-    listaUs->imprimirUsuarios();
+    //listaUs->imprimirUsuarios();
 }
 
 
@@ -169,6 +172,10 @@ bool Usuarios::validarCorreo(string correo){
 
 void Usuarios::graficarLista(){
     listaUs->graficarLista();
+}
+
+string Usuarios::generarCodigoSalida(){
+    return listaUs->generarCodigoSalida();
 }
 
 Usuarios::~Usuarios()

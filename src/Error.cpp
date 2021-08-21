@@ -17,6 +17,15 @@ Error::Error(string tipo, string descripcion, Usuarios *usuario){
     this->id = idError;
     this->tipo = tipo;
     this->descripcion = descripcion;
+    this->usuario = usuario;
+}
+
+
+Error::Error(string tipo, string descripcion, Tarea *tarea){
+    idError+=1;
+    this->id = idError;
+    this->tipo = tipo;
+    this->descripcion = descripcion;
 }
 
 void Error::insetarError(Error *err){

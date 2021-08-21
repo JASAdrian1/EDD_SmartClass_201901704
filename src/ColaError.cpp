@@ -57,34 +57,37 @@ void ColaError::mostrarCola(){
     }
 }
 
-int contadorGraficas;
+int contGraficasErrores;
 void ColaError::graficarErrores(){
-    contadorGraficas+=1;
+    contGraficasErrores+=1;
     if(!this->estaVacia()){
-        ofstream fs("graficaColaErrores"+to_string(contadorGraficas)+".dot");
+        ofstream fs("graficaColaErrores"+to_string(contGraficasErrores)+".dot");
         fs<<"digraph g {"<<endl;
         fs<<"rankdir=LR;"<<endl;
         fs<<"node[shape=circle];"<<endl;
         int contador = 0;
         NodoError *tmp = this->primero;
         while(tmp->siguiente!=nullptr){
-            string info = "ID:"+to_string(tmp->err->id)+"\nTipo: "+tmp->err->tipo+
-            "\nDescripcion: "+tmp->err->descripcion;
+            string info = "ID:"+to_string(tmp->err->id)+"\\nTipo: "+tmp->err->tipo+
+            "\\nDescripcion: "+tmp->err->descripcion;
             fs<<contador<<"[label=\""<<info<<"\"];"<<endl;
             contador+=1;
             tmp = tmp->siguiente;
         }
         //Se crea el ultimo nodo de la grafica
-        string info = "ID:"+to_string(tmp->err->id)+"\nTipo: "+tmp->err->tipo+
-            "\nDescripcion: "+tmp->err->descripcion;
+        string info = "ID:"+to_string(tmp->err->id)+"\\nTipo: "+tmp->err->tipo+
+            "\\nDescripcion: "+tmp->err->descripcion;
         fs<<contador<<"[label=\""<<info<<"\"];"<<endl;
 
         for(int i=0;i<contador;i++){
             fs<<i<<"->"<<i+1<<endl;
-            fs<<i+1<<"->"<<i<<endl;
         }
         fs<<"}"<<endl;
         cout<<"Se ha creado la grafica exitosamente"<<endl;
+        fs.close();
+        string nombreGraficaErrores = "graficaColaErrores"+to_string(contGraficasErrores);
+        system(("dot -Tsvg "+nombreGraficaErrores+".dot -o "+nombreGraficaErrores+".svg").c_str() );
+        system((nombreGraficaErrores+".png").c_str() );
         getch();
     }
 }

@@ -16,6 +16,7 @@ class Usuarios
         void eliminarUsuario();
         bool validarCorreo(std::string correo);
         void graficarLista();
+        std::string generarCodigoSalida();
         std::string id;
         std::string dpi;
         std::string nombre;

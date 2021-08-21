@@ -20,6 +20,7 @@ class ListaUsuarios
         void eliminarUsuario(string dpi);
         void imprimirUsuarios();
         void graficarLista();
+        string generarCodigoSalida();
 
 
 

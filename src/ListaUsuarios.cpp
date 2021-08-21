@@ -62,15 +62,6 @@ void ListaUsuarios::imprimirUsuarios(){
         cout<<"*************************"<<endl;
         tmp = tmp->siguiente;
     }
-    /*cout<<"ID: "<<tmp->usuario.id<<endl;
-    cout<<"DPI: "<<tmp->usuario.dpi<<endl;
-    cout<<"Nombre: "<<tmp->usuario.nombre<<endl;
-    cout<<"Carrera: "<<tmp->usuario.carrera<<endl;
-    cout<<"Correo: "<<tmp->usuario.correo<<endl;
-    cout<<"Password: "<<tmp->usuario.password<<endl;
-    cout<<"Creditos: "<<tmp->usuario.creditos<<endl;
-    cout<<"Edad: "<<tmp->usuario.edad<<endl;
-    cout<<"*************************"<<endl;*/
 }
 
 NodoUsuario* ListaUsuarios::buscarUsuario(string dpi){
@@ -203,30 +194,30 @@ void ListaUsuarios::eliminarUsuario(string dpi){
 }
 
 
-int contGraphError = 0;
+int contGraphEstudiantes = 0;
 void ListaUsuarios::graficarLista(){
-    contGraphError+=1;
+    contGraphEstudiantes+=1;
     if(!this->listaVacia()){
-        ofstream fs("graficaListaEstudiantes"+to_string(contGraphError)+".dot");
+        ofstream fs("graficaListaEstudiantes"+to_string(contGraphEstudiantes)+".dot");
         fs<<"digraph g {"<<endl;
         fs<<"rankdir=LR;"<<endl;
         fs<<"node[shape=circle];"<<endl;
         int contador = 0;
         NodoUsuario *tmp = this->primero;
         while(tmp->siguiente!=nullptr){
-            string info = "ID:"+tmp->usuario.id+"\nDPI: "+tmp->usuario.dpi+
-            "\nNombre: "+tmp->usuario.nombre+"\nCarrera: "+tmp->usuario.carrera+
-            +"\nPassword: "+tmp->usuario.password+"\nCreditos: "+tmp->usuario.creditos+
-            +"\nEdad: "+tmp->usuario.edad;
+            string info = "ID:"+tmp->usuario.id+"\\nDPI: "+tmp->usuario.dpi+
+            "\\nNombre: "+tmp->usuario.nombre+"\\nCarrera: "+tmp->usuario.carrera+
+            +"\\nPassword: "+tmp->usuario.password+"\\nCreditos: "+tmp->usuario.creditos+
+            +"\\nEdad: "+tmp->usuario.edad;
             fs<<contador<<"[label=\""<<info<<"\"];"<<endl;
             contador+=1;
             tmp = tmp->siguiente;
         }
         //Se crea el ultimo nodo de la grafica
-        string info = "ID:"+tmp->usuario.id+"\nDPI: "+tmp->usuario.dpi+
-            "\nNombre: "+tmp->usuario.nombre+"\nCarrera: "+tmp->usuario.carrera+
-            +"\nPassword: "+tmp->usuario.password+"\nCreditos: "+tmp->usuario.creditos+
-            +"\nEdad: "+tmp->usuario.edad;
+        string info = "ID:"+tmp->usuario.id+"\\nDPI: "+tmp->usuario.dpi+
+            "\\nNombre: "+tmp->usuario.nombre+"\\nCarrera: "+tmp->usuario.carrera+
+            +"\\nPassword: "+tmp->usuario.password+"\\nCreditos: "+tmp->usuario.creditos+
+            +"\\nEdad: "+tmp->usuario.edad;
         fs<<contador<<"[label=\""<<info<<"\"];"<<endl;
 
         fs<<0<<"->"<<contador<<endl;
@@ -235,10 +226,34 @@ void ListaUsuarios::graficarLista(){
             fs<<i<<"->"<<i+1<<endl;
         }
         fs<<"}"<<endl;
+        fs.close();
+        string nombreGraficaEstudiantes = "graficaListaEstudiantes"+to_string(contGraphEstudiantes);
+        system(("dot -Tsvg "+nombreGraficaEstudiantes+".dot -o "+nombreGraficaEstudiantes+".svg").c_str() );
+        system((nombreGraficaEstudiantes+".svg").c_str() );
         cout<<"Se ha creado la grafica exitosamente"<<endl;
         getch();
     }else{
-        cout<<"No se ha creado la grafica ya que la cola de errores se encuentra vacia"<<endl;
+        cout<<"No se ha creado la grafica ya que la lista de estudiantes esta vacia"<<endl;
     }
+}
+
+
+string ListaUsuarios::generarCodigoSalida(){
+    string codigo = "";
+    NodoUsuario *tmp = this->primero;
+    while(tmp != this->ultimo->siguiente){
+        codigo+="\t¿element type=\"user\"$?\n";
+        codigo+="\t\t¿item Carnet: "+tmp->usuario.id+"$?\n";
+        codigo+="\t\t¿item Dpi: "+tmp->usuario.dpi+"$?\n";
+        codigo+="\t\t¿item Nombre: "+tmp->usuario.nombre+"$?\n";
+        codigo+="\t\t¿item Carrera: "+tmp->usuario.carrera+"$?\n";
+        codigo+="\t\t¿item Correo: "+tmp->usuario.correo+"$?\n";
+        codigo+="\t\t¿item Password: "+tmp->usuario.password+"$?\n";
+        codigo+="\t\t¿item Creditos: "+tmp->usuario.creditos+"$?\n";
+        codigo+="\t\t¿item Edad: "+tmp->usuario.edad+"$?\n";
+        codigo+="\t¿$element\"\n";
+        tmp = tmp->siguiente;
+    }
+    return codigo;
 }
 

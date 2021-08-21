@@ -36,6 +36,7 @@
 		</Compiler>
 		<Unit filename="include/ColaError.h" />
 		<Unit filename="include/Error.h" />
+		<Unit filename="include/ListaTareas.h" />
 		<Unit filename="include/ListaUsuarios.h" />
 		<Unit filename="include/NodoError.h" />
 		<Unit filename="include/NodoTarea.h" />
@@ -46,6 +47,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ColaError.cpp" />
 		<Unit filename="src/Error.cpp" />
+		<Unit filename="src/ListaTareas.cpp" />
 		<Unit filename="src/ListaUsuarios.cpp" />
 		<Unit filename="src/NodoError.cpp" />
 		<Unit filename="src/NodoTarea.cpp" />

@@ -5,8 +5,11 @@
 #include<Usuarios.h>
 #include<Tarea.h>
 #include<Error.h>
+#include <fstream>
 
 using namespace std;
+
+void reporteCodigoSalida();
 
 void menu();
 
@@ -16,10 +19,11 @@ int main()
     return 0;
 }
 
+Usuarios *usuarios = new Usuarios();
+Tarea *tareas = new Tarea();
 
 void menu(){
-    Usuarios *usuarios = new Usuarios();
-    Tarea *tareas = new Tarea();
+
     string opcion ="";
     while (opcion !="5"){
         printf("Menu");
@@ -73,12 +77,36 @@ void menu(){
             cin>>opcionReporte;
             if(opcionReporte == "1"){
                 usuarios->graficarLista();
+            }else if(opcionReporte == "2"){
+                tareas->graficarLista();
+            }else if(opcionReporte == "3"){
+                int mes=0; int dia=0; int hora=0; int indice=0;
+                cout<<"Ingrese el mes: "; cin>>mes;
+                cout<<"Ingrese el dia: "; cin>>dia;
+                cout<<"Ingrese la hora: "; cin>>hora;
+                indice = ((hora-8)*30 + dia-1)*5+mes-7;
+                tareas->busquedaLinealizada(indice);
+            }else if(opcionReporte =="4"){
+                int mes=0; int dia=0; int hora=0; int indice=0;
+                cout<<"Ingrese el mes: "; cin>>mes;
+                cout<<"Ingrese el dia: "; cin>>dia;
+                cout<<"Ingrese la hora: "; cin>>hora;
+                indice = ((hora-8)*30 + dia-1)*5+mes-7;
+                if (indice>=0){
+                    cout<<"La tarea se encuentra en la posicion "<<indice<<" de la lista linealizada."<<endl;
+                }else{
+                    cout<<"No se ha encontrado la tarea en la lista"<<endl;
+                }
+
+                getch();
             }else if(opcionReporte == "5"){
                 Error::graficarErrores();
+            }else if(opcionReporte == "6"){
+                reporteCodigoSalida();
             }
 
         }else if(opcion == "5"){
-            cout<<"Presione enter para finalizar el programa"<<endl;
+            cout<<"Presione cualquier tecla para finalizar el programa"<<endl;
             getch();
             break;
         }else{
@@ -87,4 +115,18 @@ void menu(){
         }
     }
 
+}
+
+
+
+
+void reporteCodigoSalida(){
+    ofstream fs("codigoSalida.txt");
+    fs<<"¿Elements?"<<endl;
+    fs<<usuarios->generarCodigoSalida();
+    fs<<tareas->generarCodigoSalida();
+    fs<<"¿$Elements?"<<endl;
+    fs.close();
+    cout<<"Se ha generado el codigo de salida exitosamente"<<endl;
+    getch();
 }
