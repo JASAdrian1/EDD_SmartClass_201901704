@@ -100,57 +100,55 @@ void ListaUsuarios::modificarUsuario(string dpi){
                 usuario->usuario.id = nuevoDato;
                 cout<<"Se ha modificado exitosamente el ID"<<endl;
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
             }else if(opcion == "2"){
                 cout<<"Ingrese el nuevo DPI: "<<endl; cin >> nuevoDato;
                 usuario->usuario.dpi = nuevoDato;
                 cout<<"Se ha modificado exitosamente el DPI"<<endl;
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
             }else if(opcion == "3"){
                 cout<<"Ingrese el nuevo nombre: "<<endl; cin >> nuevoDato;
                 usuario->usuario.nombre = nuevoDato;
                 cout<<"Se ha modificado exitosamente el nombre"<<endl;
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
             }else if(opcion == "4"){
                 cout<<"Ingrese la nueva carrera: "<<endl; cin >> nuevoDato;
                 usuario->usuario.carrera = nuevoDato;
                 cout<<"Se ha modificado exitosamente la carrera"<<endl;
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
             }else if(opcion == "5"){
                 cout<<"Ingrese el nuevo correo: "<<endl; cin >> nuevoDato;
                 usuario->usuario.correo = nuevoDato;
                 cout<<"Se ha modificado exitosamente el correo"<<endl;
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
             }else if(opcion == "6"){
                 cout<<"Ingrese el nuevo password: "<<endl; cin >> nuevoDato;
                 usuario->usuario.password = nuevoDato;
                 cout<<"Se ha modificado exitosamente el password"<<endl;
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
             }else if(opcion == "7"){
                 cout<<"Ingrese la nueva cantidad de creditos: "<<endl; cin >> nuevoDato;
                 usuario->usuario.creditos = nuevoDato;
                 cout<<"Se ha modificado exitosamente los creditos"<<endl;
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
             }else if(opcion == "8"){
                 cout<<"Ingrese la nueva edad: "<<endl; cin >> nuevoDato;
                 usuario->usuario.edad = nuevoDato;
                 cout<<"Se ha modificado exitosamente la edad"<<endl;
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
             }
         }else{
             cout<<"No se ha encontrado el usuario"<<endl;
             getch();
         }
     }
-
-
 }
 
 
@@ -178,7 +176,7 @@ void ListaUsuarios::eliminarUsuario(string dpi){
                 delete(usuario);
 
                 getch();
-                this->imprimirUsuarios();
+                //this->imprimirUsuarios();
                 break;
             }else if(confirmacion == "no"){
                 cout<<"No se ha eliminado al usuario"<<endl;

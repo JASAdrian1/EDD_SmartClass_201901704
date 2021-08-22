@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1629582709 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\main.cpp
+1629592021 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\main.cpp
 	<iostream>
 	<Usuarios.h>
 	<string>
@@ -12,7 +12,7 @@
 1629430724 c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\include\usuarios.h
 	<string>
 
-1629583730 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\usuarios.cpp
+1629592613 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\usuarios.cpp
 	"Usuarios.h"
 	<iostream>
 	<fstream>
@@ -22,7 +22,7 @@
 	<regex>
 	<conio.h>
 
-1629567205 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\listausuarios.cpp
+1629592613 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\listausuarios.cpp
 	"ListaUsuarios.h"
 	<iostream>
 	<string>
@@ -41,7 +41,7 @@
 1628654151 c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\include\nodousuario.h
 	<Usuarios.h>
 
-1629582840 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\tarea.cpp
+1629592684 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\tarea.cpp
 	"Tarea.h"
 	<iostream>
 	<fstream>
@@ -49,8 +49,9 @@
 	<Error.h>
 	<regex>
 	<ListaTareas.h>
+	<conio.h>
 
-1629582791 c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\include\tarea.h
+1629591787 c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\include\tarea.h
 	<string>
 	<iostream>
 
@@ -79,7 +80,7 @@
 1629270144 c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\include\nodoerror.h
 	<Error.h>
 
-1629437115 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\colaerror.cpp
+1629586198 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\colaerror.cpp
 	"ColaError.h"
 	<Error.h>
 	<NodoError.h>
@@ -96,14 +97,14 @@
 1629352928 c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\include\reporte.h
 	<Error.h>
 
-1629582840 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\listatareas.cpp
+1629592014 source:c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\src\listatareas.cpp
 	"ListaTareas.h"
 	<iostream>
 	<string>
 	<conio.h>
 	<fstream>
 
-1629582752 c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\include\listatareas.h
+1629589482 c:\users\adrian aguilar\documents\estructuradatos\proyectofase1\include\listatareas.h
 	<NodoTarea.h>
 	<string>
 	<ColaError.h>

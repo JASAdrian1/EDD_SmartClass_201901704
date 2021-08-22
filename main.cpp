@@ -63,6 +63,24 @@ void menu(){
                 }else if(opcionUsuarios == "3"){
                     usuarios->eliminarUsuario();
                 }
+            }else if(opcionSub == "2"){
+                string opcionTareas ="";
+                cout<<"MENU TAREAS"<<endl;
+                cout<<"1. Ingresar"<<endl;
+                cout<<"2. Modificar"<<endl;
+                cout<<"3. Eliminar"<<endl;
+                cout<<"4. Salir"<<endl;
+                printf("Ingrese el numero de la opcion que desea ejecutar:\n");
+                cin>>opcionTareas;
+                if(opcionTareas =="1"){
+                    tareas->insertarTarea();
+                }
+                else if(opcionTareas =="2"){
+                    tareas->modificarTarea();
+                }
+                else if(opcionTareas == "3"){
+                    tareas->eliminarTarea();
+                }
             }
         //Opciones para los reportes
         }else if(opcion == "4"){

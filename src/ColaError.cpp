@@ -87,7 +87,7 @@ void ColaError::graficarErrores(){
         fs.close();
         string nombreGraficaErrores = "graficaColaErrores"+to_string(contGraficasErrores);
         system(("dot -Tsvg "+nombreGraficaErrores+".dot -o "+nombreGraficaErrores+".svg").c_str() );
-        system((nombreGraficaErrores+".png").c_str() );
+        system((nombreGraficaErrores+".svg").c_str() );
         getch();
     }
 }

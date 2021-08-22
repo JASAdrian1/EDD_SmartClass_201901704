@@ -124,14 +124,7 @@ void Usuarios::cargarUsuarios(){
 
 
 void Usuarios::insertarUsuario(){
-    string id;
-    string dpi;
-    string nombre;
-    string carrera;
-    string correo;
-    string password;
-    string creditos;
-    string edad;
+    string id =""; string dpi=""; string nombre=""; string carrera=""; string correo=""; string password=""; string creditos=""; string edad;
     cout<<"Ingrese el ID: "<<endl;  cin >> id;
     cout<<"Ingrese el DPI: "<<endl;  cin >> dpi;
     cout<<"Ingrese el nombre: "<<endl;  cin >> nombre;

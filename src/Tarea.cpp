@@ -5,6 +5,7 @@
 #include<Error.h>
 #include<regex>
 #include<ListaTareas.h>
+#include<conio.h>
 
 int identificador = 0;
 ListaTareas *listaT = new ListaTareas();
@@ -85,35 +86,27 @@ void Tarea::cargarTareas(){
                     switch(contador){
                         case 0:
                             mes = stoi(linea.substr(start, endS - start));
-                            cout<<"Mes: "<<mes<<endl;
                             break;
                         case 1:
                             dia = stoi(linea.substr(start, endS - start));
-                            cout<<"Dia: "<<dia<<endl;
                             break;
                         case 2:
                             hora = stoi(linea.substr(start, endS - start));
-                            cout<<"Hora: "<<hora<<endl;
                             break;
                         case 3:
                             carnet = linea.substr(start, endS - start);
-                            cout<<"Carnet: "<<carnet<<endl;
                             break;
                         case 4:
                             nombre = linea.substr(start, endS - start);
-                            cout<<"Nombre: "<<nombre<<endl;
                             break;
                         case 5:
                             descripcion = linea.substr(start, endS - start);
-                            cout<<"Descripcion: "<<descripcion<<endl;
                             break;
                         case 6:
                             materia = linea.substr(start, endS - start);
-                            cout<<"Materia: "<<materia<<endl;
                             break;
                         case 7:
                             fecha = linea.substr(start, endS - start);
-                            cout<<"Fecha: "<<fecha<<endl;
                             break;
 
                     }
@@ -126,7 +119,7 @@ void Tarea::cargarTareas(){
                 estado = linea.substr(start, endS - start);
                 Tarea *tarea = new Tarea(mes, dia, hora, carnet, nombre, descripcion, materia, fecha, estado);
                 //Se agrega la tarea al arreglo estatico de tareas
-                tareasArray[mes-7][dia-1][hora-8] = tarea;
+
                 if(hora<8 || hora>16){
                     Error *err = new Error("Tarea","Hora de la tarea fuera de rango",tarea);
                     Error::insetarError(err);
@@ -136,6 +129,8 @@ void Tarea::cargarTareas(){
                 }else if(dia<1 || mes>30){
                     Error *err = new Error("Tarea","Dia de la tarea fuera de rango",tarea);
                     Error::insetarError(err);
+                }else{
+                    tareasArray[mes-7][dia-1][hora-8] = tarea;
                 }
                 if(!this->validarFormatoFehca(tarea->fecha)){
                     Error *err = new Error("Tarea","Formato de la fecha invalido",tarea);
@@ -145,31 +140,9 @@ void Tarea::cargarTareas(){
             contEnc+=1;
 
         }
-        Error::imprimirColaError();
+        //Error::imprimirColaError();
 
 
-        cout<<"hola"<<endl;
-        cout<<tareasArray[3][3][1]->id<<endl;
-        cout<<typeid(tareasArray[1][0][1]).name()<<endl;
-        //cout<<tareasArray[0][13][2]->id<<endl;
-        /*for(int i =0;i<5;i++){
-            for(int j=0;j<30;j++){
-                cout<<"****************************"<<endl;
-                cout<<j+1<<"/"<<i+7<<"/"<<2021<<endl;
-                for(int k=0;k<9;k++){
-                    if(tareasArray[i][j][k]->id !="-1"){
-                        cout<<"Hora: "<<k+8<<endl;
-                        cout<<"Id: "<<tareasArray[i][j][k]->id<<endl;
-                        cout<<"Carnet: "<<tareasArray[i][j][k]->carnet<<endl;
-                        cout<<"Nombre: "<<tareasArray[i][j][k]->nombre<<endl;
-                        cout<<"Descripcion: "<<tareasArray[i][j][k]->descripcion<<endl;
-                        cout<<"Materia: "<<tareasArray[i][j][k]->materia<<endl;
-                        cout<<"Estado: "<<tareasArray[i][j][k]->estado<<endl;
-                    }
-                }
-                cout<<"****************************"<<endl;
-            }
-        }*/
 
         //Se realiza la linealizacion de las tareas
         int contadorCal = 0;
@@ -179,24 +152,58 @@ void Tarea::cargarTareas(){
                     tareasArray[k][j][i]->id = to_string(contadorCal);
                     listaT->insertar(tareasArray[k][j][i]);
                     contadorCal+=1;
-                    if(tareasArray[k][j][i]->materia!="-1"){
-                        cout<<"****************************"<<endl;
-                        cout<<tareasArray[k][j][i]->id<<endl;
-                        cout<<tareasArray[k][j][i]->nombre<<endl;
-                        cout<<"****************************"<<endl;
-                    }
                 }
             }
         }
         //listaT->imprimirTareas();
 
 
-        printf("Se ha cargado el archivo correctamente");
+        printf("Se ha cargado el archivo correctamente\n");
+        getch();
 
     }else{
         cout<<"No se ha encontrado el archivo"<<endl;
     }
 
+}
+
+void Tarea::insertarTarea(){
+    int id =0;
+    string carnet="";
+    string nombre="";
+    string descripcion="";
+    string materia="";
+    string fecha="";
+    int mes=0;
+    int dia=0;
+    int hora=0;
+    cout<<"Ingrese el carnet: "<<endl;  cin >> carnet;
+    cout<<"Ingrese el nombre del curso: "<<endl;  cin >> nombre;
+    cout<<"Ingrese la descripcion: "<<endl;  cin >> descripcion;
+    cout<<"Ingrese la materia: "<<endl;  cin >> materia;
+    cout<<"Ingrese la fecha: "<<endl;  cin >> fecha;
+    cout<<"Ingrese el mes: "<<endl;  cin >> mes;
+    cout<<"Ingrese el dia: "<<endl;  cin >> dia;
+    cout<<"Ingrese la hora: "<<endl;  cin >> hora;
+    id = ((hora-8)*30 + dia-1)*5+mes-7;
+    Tarea *nuevaTarea = new Tarea(mes,dia,hora,carnet,nombre,descripcion,materia,fecha,estado);
+    nuevaTarea->id = to_string(id);
+    listaT->insertar(nuevaTarea);
+
+}
+
+void Tarea::eliminarTarea(){
+    int indice =0;
+    cout<<"Ingrese el id de la tarea que desea eliminar: "<<endl;
+    cin>>indice;
+    listaT->eliminarTarea(indice);
+}
+
+void Tarea::modificarTarea(){
+    int indice =0;
+    cout<<"Ingrese el indice de la tarea que desea eliminar: ";
+    cin>>indice;
+    listaT->modificarTarea(indice);
 }
 
 
