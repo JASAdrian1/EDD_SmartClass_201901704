@@ -24,14 +24,66 @@ class Arbol_avl:
             raiz = nuevo
             return raiz
 
+    def buscar_por_carnet(self,carnet,raiz):
+        if raiz is not None:
+            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                print("Carnet: "+str(carnet))
+                return raiz
+            self.buscar_por_carnet(carnet, raiz.izquierda)
+            self.buscar_por_carnet(carnet, raiz.derecha)
+
+    def insertar_anio(self,carnet,raiz,no_anio):
+        if raiz is not None:
+            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                raiz.estudiante.lista_de_anios.insertar(no_anio)
+            self.insertar_anio(carnet, raiz.izquierda,no_anio)
+            self.insertar_anio(carnet, raiz.derecha,no_anio)
+
 
     def preorden(self,raiz):
         if raiz is not None:
-            print(raiz.id)
+            print("-----------------------------------------------------------------")
+            print(raiz.estudiante.carnet)
+            raiz.estudiante.lista_de_anios.imprimir_lista()
             self.preorden(raiz.izquierda)
             self.preorden(raiz.derecha)
 
 
 
-    def graficar_arbol(self):
-        print("Hola")
+
+
+
+    def graficar(self):
+        cadena = "digraph arbol {\n"
+        if (self.raiz != None):
+            cadena += self.listar(self.raiz)
+            cadena += "\n"
+            cadena += self.enlazar(self.raiz)
+        cadena += "}"
+        Archivo = open("ejemplo.dot", "w+")
+        Archivo.write(cadena)
+        Archivo.close()
+
+    def listar(self, raiz_actual):
+        if raiz_actual:
+            cadena = "n" + str(raiz_actual.estudiante.carnet) + "[label= \"" + str(raiz_actual.estudiante.carnet) + "\"];\n"
+            cadena += self.listar(raiz_actual.izquierda)
+            cadena += self.listar(raiz_actual.derecha)
+            return cadena
+        else:
+            return ""
+
+    def enlazar(self, raiz_actual):
+        cadena = ""
+        if raiz_actual:
+            if raiz_actual.izquierda:
+                cadena += "n" + str(raiz_actual.estudiante.carnet) + " -> n" + str(raiz_actual.izquierda.estudiante.carnet) + "\n"
+            if raiz_actual.derecha:
+                cadena += "n" + str(raiz_actual.estudiante.carnet) + " -> n" + str(raiz_actual.derecha.estudiante.carnet) + "\n"
+
+            cadena += self.enlazar(raiz_actual.izquierda)
+            cadena += self.enlazar(raiz_actual.derecha)
+
+        return cadena

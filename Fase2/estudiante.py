@@ -1,9 +1,9 @@
 from Analizadores.sintactico import parser
-from main import arbol_estudiantes
+from lista_anios import lista_anios
 
 
 class Estudiante():
-    def __init__(self,carnet, dpi, nombre, carrera, password, creditos, edad, lista_años = None):
+    def __init__(self,carnet, dpi, nombre, carrera, password, creditos, edad):
         self.carnet = carnet
         self.dpi = dpi
         self.nombre = nombre
@@ -11,6 +11,7 @@ class Estudiante():
         self.password = password
         self.creditos = creditos
         self.edad = edad
+        self.lista_de_anios = lista_anios()
 
     def imprimirInformacion(self):
         print("Carnet: ",self.carnet)
@@ -23,7 +24,7 @@ class Estudiante():
 
 
 
-def cargarEstudiantes(texto):
+def cargarEstudiantes(texto,arbol_estudiantes):
     texto_analizado = parser.parse(texto)
     for item in texto_analizado:
         if item['type'] == "user":
@@ -50,6 +51,9 @@ def cargarEstudiantes(texto):
                     print("La estructura de este estudiante no era la correcta")
             nuevoEstudiante = Estudiante(carnet[1:-1],dpi[1:-1],nombre[1:-1],carrera[1:-1],password[1:-1],creditos,edad)
             arbol_estudiantes.insertar(nuevoEstudiante,nuevoEstudiante.carnet)
-    arbol_estudiantes.preorden(arbol_estudiantes.raiz)
+
+    #arbol_estudiantes.preorden(arbol_estudiantes.raiz)
+    #arbol_estudiantes.graficar()
+
 
 
