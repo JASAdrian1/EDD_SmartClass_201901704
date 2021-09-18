@@ -1,11 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import time
-import json
 import estudiante
 from arbol_avl import Arbol_avl
 import tarea
-
 
 arbol_estudiantes = Arbol_avl()
 
@@ -27,11 +24,10 @@ def cargar():
     texto = file.read()
     if tipoArchivo == "estudiante" or tipoArchivo == "recordatorio":
         estudiante.cargarEstudiantes(texto,arbol_estudiantes)
-        time.sleep(2)
         print("Se han cargado los estudiantes")
-        tarea.cargar_tareas(texto,arbol_estudiantes)
+        tarea.cargar_tareas(texto, arbol_estudiantes)
         print("Se han cargado las tareas")
-        arbol_estudiantes.preorden(arbol_estudiantes.raiz)
+        arbol_estudiantes.imprimir_lista(arbol_estudiantes.raiz)
 
     elif tipoArchivo == "curso":
         print("Sen han cargado los cursos")

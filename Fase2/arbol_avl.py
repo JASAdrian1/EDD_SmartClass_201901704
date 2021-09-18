@@ -33,6 +33,7 @@ class Arbol_avl:
             self.buscar_por_carnet(carnet, raiz.izquierda)
             self.buscar_por_carnet(carnet, raiz.derecha)
 
+
     def insertar_anio(self,carnet,raiz,no_anio):
         if raiz is not None:
             #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
@@ -42,13 +43,25 @@ class Arbol_avl:
             self.insertar_anio(carnet, raiz.derecha,no_anio)
 
 
-    def preorden(self,raiz):
+    def insertar_mes(self,carnet,raiz,no_anio,no_mes):
+        if raiz is not None:
+            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                raiz.estudiante.lista_de_anios.insertar_mes(no_anio,no_mes)
+            self.insertar_mes(carnet, raiz.izquierda,no_anio,no_mes)
+            self.insertar_mes(carnet, raiz.derecha,no_anio,no_mes)
+
+
+    def imprimir_lista(self, raiz):
         if raiz is not None:
             print("-----------------------------------------------------------------")
             print(raiz.estudiante.carnet)
-            raiz.estudiante.lista_de_anios.imprimir_lista()
-            self.preorden(raiz.izquierda)
-            self.preorden(raiz.derecha)
+            #print("**************AÑO***************")
+            #raiz.estudiante.lista_de_anios.imprimir_lista()
+            #print("**************MESES***************")
+            raiz.estudiante.lista_de_anios.imprimir_meses()
+            self.imprimir_lista(raiz.izquierda)
+            self.imprimir_lista(raiz.derecha)
 
 
 
