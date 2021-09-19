@@ -11,3 +11,4 @@ class nodo_interno_matriz:
         self.siguiente = None
         self.arriba = None
         self.abajo = None
+        self.tareas.insertar(tarea)

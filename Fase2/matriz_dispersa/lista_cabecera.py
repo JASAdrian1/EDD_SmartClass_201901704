@@ -15,9 +15,7 @@ class lista_cabecera:
                 self.primero = nuevo_nodo
             else:
                 tmp = self.primero
-                print("--------------------------------------------------")
                 while tmp is not None:
-                    print(str(nuevo_nodo.id)+" < " + str(tmp.id))
                     if nuevo_nodo.id<tmp.id:
                         nuevo_nodo.siguiente = tmp
                         nuevo_nodo.anterior = tmp.anterior
@@ -29,7 +27,7 @@ class lista_cabecera:
 
 
                 if aux.siguiente == None:
-                    print(">" + str(nuevo_nodo.id))
+                    #print(">" + str(nuevo_nodo.id))
                     aux.siguiente = nuevo_nodo
                     nuevo_nodo.anterior = aux
 

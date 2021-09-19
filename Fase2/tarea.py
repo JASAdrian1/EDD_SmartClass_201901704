@@ -4,9 +4,10 @@ from anio import anio
 
 
 class tarea:
-    def __init__(self, dia, hora):
+    def __init__(self, dia, hora,materia):
         self.dia = dia
         self.hora = hora
+        self.materia = materia
 
 
 class anio:

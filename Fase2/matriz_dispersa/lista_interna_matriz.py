@@ -7,14 +7,17 @@ class lista_interna_matriz:
     def insertarx(self,tarea,x,y):
         nuevo_nodo = nodo_interno_matriz(tarea,x,y)
         if self.primero is not None:
-            if nuevo_nodo.posy< self.primero:
+            if nuevo_nodo.posy< self.primero.posy:
+                #print("Se inserto ", tarea.materia)
                 nuevo_nodo.siguiente = self.primero
                 self.primero.anterior = nuevo_nodo
                 self.primero = nuevo_nodo
             else:
+                #ARREGLAR ESTA SECCION
                 tmp = self.primero
                 while tmp is not None:
                     if nuevo_nodo.posy < tmp.posy:
+                        print("Se inserto ", tarea.materia)
                         nuevo_nodo.siguiente = tmp
                         nuevo_nodo.anterior = tmp.anterior
                         tmp.anterior.siguinte = nuevo_nodo
@@ -22,24 +25,27 @@ class lista_interna_matriz:
                         break
                     #Si el nodo ya existe únicamente se inserta la tarea dentro de la lista de
                     #tareas del nodo existente
-                    elif nuevo_nodo.posx == tmp.posx and nuevo_nodo.posy == nuevo_nodo.posy:
+                    elif nuevo_nodo.posx == tmp.posx and nuevo_nodo.posy == tmp.posy:
+                        #print("Se inserto ", tarea.materia)
                         tmp.tareas.insertar(tarea)
                         break
                     else:
-                        if tmp.abajo == None:
-                            tmp.abajo = nuevo_nodo
-                            nuevo_nodo.arriba = tmp
+                        if tmp.siguiente == None:
+                            #print("Se inserto ", tarea.materia)
+                            tmp.siguiente = nuevo_nodo
+                            nuevo_nodo.anterior = tmp
                             break
                         else:
                             tmp = tmp.siguiente
 
         else:
+            #print("Se inserto ", tarea.materia)
             self.primero = nuevo_nodo
 
     def insertary(self, tarea, x, y):
         nuevo_nodo = nodo_interno_matriz(tarea, x, y)
         if self.primero is not None:
-            if nuevo_nodo.posx < self.primero:
+            if nuevo_nodo.posx < self.primero.posx:
                 nuevo_nodo.abajo = self.primero
                 self.primero.arriba = nuevo_nodo
                 self.primero = nuevo_nodo
@@ -54,7 +60,7 @@ class lista_interna_matriz:
                         break
                     # Si el nodo ya existe únicamente se inserta la tarea dentro de la lista de
                     # tareas del nodo existente
-                    elif nuevo_nodo.posx == tmp.posx and nuevo_nodo.posy == nuevo_nodo.posy:
+                    elif nuevo_nodo.posx == tmp.posx and nuevo_nodo.posy == tmp.posy:
                         tmp.tareas.insertar(tarea)
                         break
                     else:
