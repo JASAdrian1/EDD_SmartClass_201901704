@@ -19,6 +19,7 @@ class lista_tarea:
     def imprimir_lista(self):
         tmp = self.primero
         if tmp is not None:
+            print("--Nueva lista")
             while tmp is not None:
                 print(tmp.tarea.materia)
                 tmp = tmp.siguiente

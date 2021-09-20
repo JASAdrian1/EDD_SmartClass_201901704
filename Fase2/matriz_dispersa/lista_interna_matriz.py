@@ -17,10 +17,10 @@ class lista_interna_matriz:
                 tmp = self.primero
                 while tmp is not None:
                     if nuevo_nodo.posy < tmp.posy:
-                        print("Se inserto ", tarea.materia)
+                        #print("Se inserto ", tarea.materia)
                         nuevo_nodo.siguiente = tmp
                         nuevo_nodo.anterior = tmp.anterior
-                        tmp.anterior.siguinte = nuevo_nodo
+                        tmp.anterior.siguiente = nuevo_nodo
                         tmp.anterior = nuevo_nodo
                         break
                     #Si el nodo ya existe únicamente se inserta la tarea dentro de la lista de

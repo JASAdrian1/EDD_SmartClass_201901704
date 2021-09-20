@@ -30,11 +30,17 @@ class lista_anios:
         tmp = self.primero
         nuevo_mes = mes(no_mes)
         while tmp is not None:
-            print(no_anio + " == " + tmp.anio.no_anio)
+            #print(no_anio + " == " + tmp.anio.no_anio)
             if no_anio == tmp.anio.no_anio:
                 tmp.meses.insertar(nuevo_mes)
             tmp = tmp.siguiente
 
+    def insertar_tarea(self, no_anio, no_mes, tarea):
+        tmp = self.primero
+        while tmp is not None:
+            if no_anio == tmp.anio.no_anio:
+                tmp.meses.insertar_tarea(no_mes, tarea)
+            tmp = tmp.siguiente
 
     def verificar_anio_repetido(self,anio):
         tmp = self.primero
@@ -70,6 +76,14 @@ class lista_anios:
         else:
             print("La lista para este estudiante esta vacia")
 
+    def imprimir_tareas(self):
+        tmp = self.primero
+        if tmp is not None:
+            while tmp is not None:
+                tmp.meses.imprimir_tareas()
+                tmp = tmp.siguiente
+        else:
+            print("La lista para este estudiante esta vacia")
 
     def tamanio_lista(self):
         contador = 0

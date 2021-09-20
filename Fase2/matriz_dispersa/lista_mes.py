@@ -1,5 +1,6 @@
 
 from matriz_dispersa.nodo_mes import nodo_mes
+from matriz_dispersa.nodo_tarea import nodo_tarea
 
 class lista_mes:
     def __init__(self):
@@ -23,12 +24,29 @@ class lista_mes:
                 tmp.siguiente = nuevo_nodo
                 tmp.anterior = aux
 
+    def insertar_tarea(self,mes,tarea):
+        tmp = self.primero
+        while tmp is not None:
+            if mes == tmp.mes.no_mes:
+                print(tarea.materia)
+                tmp.matriz_tareas.insertar(tarea,tarea.hora,tarea.dia)
+            tmp = tmp.siguiente
+
 
     def imprimir_meses(self):
         tmp = self.primero
         if tmp is not None:
             while tmp is not None:
                 print(tmp.mes.no_mes)
+                tmp = tmp.siguiente
+        else:
+            print("La lista para este estudiante esta vacia")
+
+    def imprimir_tareas(self):
+        tmp = self.primero
+        if tmp is not None:
+            while tmp is not None:
+                tmp.matriz_tareas.imprimir_matriz()
                 tmp = tmp.siguiente
         else:
             print("La lista para este estudiante esta vacia")

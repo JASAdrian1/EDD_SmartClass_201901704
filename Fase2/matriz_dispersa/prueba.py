@@ -34,7 +34,7 @@ tarea11 = tarea(5,11,"Materia")
 
 matriz_tareas = matriz()
 
-matriz_tareas.insertar(tarea1,tarea1.hora,tarea1.dia)
+"""matriz_tareas.insertar(tarea1,tarea1.hora,tarea1.dia)
 matriz_tareas.insertar(tarea2,tarea2.hora,tarea2.dia)
 matriz_tareas.insertar(tarea3,tarea3.hora,tarea3.dia)
 matriz_tareas.insertar(tarea4,tarea4.hora,tarea4.dia)
@@ -47,5 +47,5 @@ matriz_tareas.insertar(tarea10,tarea10.hora,tarea10.dia)
 matriz_tareas.insertar(tarea11,tarea11.hora,tarea11.dia)
 matriz_tareas.insertar(tarea12,tarea12.hora,tarea12.dia)
 
-matriz_tareas.imprimir_matriz()
+matriz_tareas.imprimir_matriz()"""
 

@@ -53,7 +53,7 @@ def cargarEstudiantes(texto,arbol_estudiantes):
             arbol_estudiantes.insertar(nuevoEstudiante,nuevoEstudiante.carnet)
 
     #arbol_estudiantes.preorden(arbol_estudiantes.raiz)
-    #arbol_estudiantes.graficar()
+    arbol_estudiantes.graficar()
 
 
 
