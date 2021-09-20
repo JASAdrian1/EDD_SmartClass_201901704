@@ -1,4 +1,5 @@
 from nodo_avl import Nodo_avl
+from graphviz import Graph, Source
 
 class Arbol_avl:
     def __init__(self):
@@ -77,6 +78,37 @@ class Arbol_avl:
         return tmp
 
 
+    def eliminar(self,carnet):
+        self.eliminar_estudiante(carnet,self.raiz)
+
+
+    def eliminar_estudiante(self,carnet,raiz):
+        if raiz is not None:
+            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                if raiz.derecha is None and raiz.izquierda is None:
+                    print(raiz.estudiante.carnet)
+                    raiz = None
+                    print("Se ha eliminado al usuario")
+                    return raiz
+                elif raiz.derecha is None and raiz.izquierda is not None:
+                    raiz = raiz.izquierda
+                    raiz.izquierda = None
+                    print("Se ha modificado al usuario")
+                    return raiz
+                elif raiz.izquierda is None and raiz.derecha is not None:
+                    raiz = raiz.derecha
+                    raiz.derecha = None
+                    print("Se ha modificado al usuario")
+                    return raiz
+            self.eliminar_estudiante(carnet, raiz.izquierda)
+            self.eliminar_estudiante(carnet, raiz.derecha)
+
+    def modificar(self,nuevo_estudiante):
+        self.modifiar_estudiante(nuevo_estudiante.carnet,nuevo_estudiante,self.raiz)
+
+
+
     def buscar_por_carnet(self,carnet,raiz):
         if raiz is not None:
             #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
@@ -85,6 +117,39 @@ class Arbol_avl:
                 return raiz
             self.buscar_por_carnet(carnet, raiz.izquierda)
             self.buscar_por_carnet(carnet, raiz.derecha)
+
+    def modifiar_estudiante(self,carnet,estudiante,raiz):
+        if raiz is not None:
+            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                raiz.estudiante = estudiante
+                print("Se ha modificado al usuario")
+                return raiz
+            self.modifiar_estudiante(carnet,estudiante, raiz.izquierda)
+            self.modifiar_estudiante(carnet,estudiante, raiz.derecha)
+
+    #METODO PARA LA FUNCION GET DEL MAIN
+    def get_informacion_estudiante(self,carnet,raiz,info_estudiante):
+        if raiz is not None:
+            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                estudiante = raiz.estudiante
+                informacion_estudiante = {
+                    "carnet": estudiante.carnet,
+                    "dpi":estudiante.dpi,
+                    "nombre":estudiante.nombre,
+                    "carrera":estudiante.carrera,
+                    "correo":estudiante.correo,
+                    "password":estudiante.password,
+                    "creditos":estudiante.creditos,
+                    "edad":estudiante.edad
+                }
+                info_estudiante.clear()
+                info_estudiante.append(informacion_estudiante)
+                #print(info_estudiante)
+                return informacion_estudiante
+            self.get_informacion_estudiante(carnet, raiz.izquierda,info_estudiante)
+            self.get_informacion_estudiante(carnet, raiz.derecha,info_estudiante)
 
 
     def insertar_anio(self,carnet,raiz,no_anio):
@@ -128,19 +193,23 @@ class Arbol_avl:
 
 
     def graficar(self):
+
         cadena = "digraph arbol {\n"
         if (self.raiz != None):
             cadena += self.listar(self.raiz)
             cadena += "\n"
             cadena += self.enlazar(self.raiz)
         cadena += "}"
-        Archivo = open("ejemplo.dot", "w+")
+        nombre_archivo = r'C:\Users\Adrian Aguilar\Desktop\Reportes_F2\grafica_estudiantes.dot'
+        Archivo = open(nombre_archivo, "w+")
         Archivo.write(cadena)
         Archivo.close()
+        s = Source.from_file(nombre_archivo)
+        s.view()
 
     def listar(self, raiz_actual):
         if raiz_actual:
-            cadena = "n" + str(raiz_actual.estudiante.carnet) + "[label= \"" + str(raiz_actual.estudiante.carnet) + "\"];\n"
+            cadena = "n" + str(raiz_actual.estudiante.carnet) + "[label= \"" + str(raiz_actual.estudiante.get_informacion()) + "\" shape=\"rectangle\"];\n"
             cadena += self.listar(raiz_actual.izquierda)
             cadena += self.listar(raiz_actual.derecha)
             return cadena

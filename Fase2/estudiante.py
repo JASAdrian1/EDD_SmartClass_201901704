@@ -8,6 +8,7 @@ class Estudiante():
         self.dpi = dpi
         self.nombre = nombre
         self.carrera = carrera
+        self.correo = None
         self.password = password
         self.creditos = creditos
         self.edad = edad
@@ -21,6 +22,13 @@ class Estudiante():
         print("Password: ", self.password)
         print("Creditos: ", self.creditos)
         print("Edad: ", self.edad)
+
+    #METODO PARA OBTENER INFO CUANDO SE REALIZAN LAS GRAFICAS
+    def get_informacion(self):
+        informacion = self.carnet+"\\n"
+        informacion += self.nombre + "\\n"
+        informacion += self.carrera
+        return informacion
 
 
 
@@ -53,7 +61,7 @@ def cargarEstudiantes(texto,arbol_estudiantes):
             arbol_estudiantes.insertar(nuevoEstudiante,nuevoEstudiante.carnet)
 
     #arbol_estudiantes.preorden(arbol_estudiantes.raiz)
-    arbol_estudiantes.graficar()
+    #arbol_estudiantes.graficar()
 
 
 
