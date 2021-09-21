@@ -179,6 +179,16 @@ class Arbol_avl:
             self.insertar_tarea(carnet, raiz.derecha,no_anio,no_mes,tarea)
 
 
+    def buscar_tarea(self, carnet, raiz, no_anio, no_mes, tarea):
+        if raiz is not None:
+            # print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                # print(tarea.materia)
+                raiz.estudiante.lista_de_anios.insertar_tarea(no_anio, no_mes, tarea)
+            self.buscar_tarea(carnet, raiz.izquierda, no_anio, no_mes, tarea)
+            self.buscar_tarea(carnet, raiz.derecha, no_anio, no_mes, tarea)
+
+
     def imprimir_lista(self, raiz):
         if raiz is not None:
             print("-----------------------------------------------------------------")
@@ -193,7 +203,6 @@ class Arbol_avl:
 
 
     def graficar(self):
-
         cadena = "digraph arbol {\n"
         if (self.raiz != None):
             cadena += self.listar(self.raiz)

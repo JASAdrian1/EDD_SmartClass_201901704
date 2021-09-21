@@ -1,0 +1,20 @@
+digraph {
+	graph [rankdir=TB]
+	f2 [label=2]
+	f4 [label=4]
+	f8 [label=8]
+	f10 [label=10]
+	f11 [label=11]
+	f21 [label=21]
+	c7 [label=7]
+	c21 [label=21]
+	rankdir=LR
+	"" -> f2
+	f2 -> f4
+	f4 -> f8
+	f8 -> f10
+	f10 -> f11
+	f11 -> f21
+	"" -> c7
+	c7 -> c21
+}

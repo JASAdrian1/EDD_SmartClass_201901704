@@ -84,12 +84,18 @@ def eliminar_estudiante():
     return {"Mensaje":"Se ha eliminado al estudiante con exito"}
 
 
+@app.route("/recordatorios",methods=['GET'])
+def get_info_tarea():
+    print("PENDIENTE")
+    return {'Mensaje':'Pendiente'}
+
 @app.route("/reporte", methods =['GET'])
 def graficar():
     tipo_grafica = request.json['tipo']
     if tipo_grafica == 0:
         arbol_estudiantes.graficar()
     return {'Mensaje':'Se ha graficado el arbol correctamente'}
+
 
 if __name__=="__main__":
     import os

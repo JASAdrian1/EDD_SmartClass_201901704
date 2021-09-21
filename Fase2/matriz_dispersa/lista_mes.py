@@ -33,6 +33,15 @@ class lista_mes:
             tmp = tmp.siguiente
 
 
+    def buscar_tarea(self,mes,tarea):
+        tmp = self.primero
+        while tmp is not None:
+            if mes == tmp.mes.no_mes:
+                print(tarea.materia)
+                tmp.matriz_tareas.buscar_tarea(tarea.hora,tarea.dia)
+            tmp = tmp.siguiente
+
+
     def imprimir_meses(self):
         tmp = self.primero
         if tmp is not None:

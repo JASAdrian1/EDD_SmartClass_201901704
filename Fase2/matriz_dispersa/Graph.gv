@@ -1,0 +1,13 @@
+graph {
+	f2 [label=2]
+	f4 [label=4]
+	f8 [label=8]
+	f10 [label=10]
+	f11 [label=11]
+	f21 [label=21]
+	f2 -- f4 [rankdir=LR]
+	f4 -- f8 [rankdir=LR]
+	f8 -- f10 [rankdir=LR]
+	f10 -- f11 [rankdir=LR]
+	f11 -- f21 [rankdir=LR]
+}

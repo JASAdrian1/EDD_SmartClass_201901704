@@ -17,24 +17,23 @@ lista_prueba.insertar(nodo_cabecera(14))
 lista_prueba.insertar(nodo_cabecera(7))
 lista_prueba.imprimir_encabezado()"""
 
-tarea1 = tarea(5,4,"Lenguajes")
-tarea2 = tarea(7,4,"Mate")
-tarea3 = tarea(5,8,"IPC")
-tarea4 = tarea(6,2,"Quimica")
-tarea5 = tarea(15,4,"EDD")
-tarea6 = tarea(5,10,"Compi")
-tarea7 = tarea(1,2,"Orga")
-tarea8 = tarea(20,21,"IO1")
-tarea9 = tarea(14,4,"Fisica")
-tarea12 = tarea(14,4,"Seminario")
-tarea10 = tarea(5,11,"Lenguajes")
-tarea11 = tarea(5,11,"Materia")
-
+tarea1 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Lenguajes","Finalizado","11/01/2020",2020,8,7,4)
+tarea2 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Mate","Finalizado","11/01/2020",2020,10,7,8)
+tarea3 = tarea(201901704,"Adrian","efsgsfgdsfgdf","IPC","Finalizado","11/01/2020",2020,11,21,2)
+tarea4 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Quimica","Finalizado","11/01/2020",2020,5,7,4)
+tarea5 = tarea(201901704,"Adrian","efsgsfgdsfgdf","EDD","Finalizado","11/01/2020",2020,10,7,10)
+tarea6 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Compi","Finalizado","11/01/2020",2020,5,7,2)
+tarea7 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Orga","Finalizado","11/01/2020",2020,5,7,21)
+tarea8 = tarea(201901704,"Adrian","efsgsfgdsfgdf","IO1","Finalizado","11/01/2020",2020,10,7,4)
+tarea9 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Fisica","Finalizado","11/01/2020",2020,10,7,4)
+tarea10 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Seminario","Finalizado","11/01/2020",2020,10,7,11)
+tarea11 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Lenguajes","Finalizado","11/01/2020",2020,11,7,11)
+tarea12 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Materia","Finalizado","11/01/2020",2020,8,7,4)
 
 
 matriz_tareas = matriz()
 
-"""matriz_tareas.insertar(tarea1,tarea1.hora,tarea1.dia)
+matriz_tareas.insertar(tarea1,tarea1.hora,tarea1.dia)
 matriz_tareas.insertar(tarea2,tarea2.hora,tarea2.dia)
 matriz_tareas.insertar(tarea3,tarea3.hora,tarea3.dia)
 matriz_tareas.insertar(tarea4,tarea4.hora,tarea4.dia)
@@ -47,5 +46,7 @@ matriz_tareas.insertar(tarea10,tarea10.hora,tarea10.dia)
 matriz_tareas.insertar(tarea11,tarea11.hora,tarea11.dia)
 matriz_tareas.insertar(tarea12,tarea12.hora,tarea12.dia)
 
-matriz_tareas.imprimir_matriz()"""
+matriz_tareas.buscar_dato(tarea4.hora,tarea4.dia)
+matriz_tareas.graficar_matriz()
+matriz_tareas.imprimir_matriz()
 

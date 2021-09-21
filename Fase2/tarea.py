@@ -60,8 +60,11 @@ def cargar_tareas(texto,arbol_estudiantes):
             no_anio = fecha.split("/")[2]
             no_mes = fecha.split("/")[1]
             dia = fecha.split("/")[0]
+
             nueva_tarea = tarea(carnet,nombre,descripcion,materia,estado,fecha,no_anio,no_mes,dia,hora)
             arbol_estudiantes.insertar_anio(carnet, arbol_estudiantes.raiz, no_anio)
+
+
             arbol_estudiantes.insertar_mes(carnet, arbol_estudiantes.raiz, no_anio, no_mes)
             arbol_estudiantes.insertar_tarea(carnet, arbol_estudiantes.raiz, no_anio, no_mes,nueva_tarea)
 

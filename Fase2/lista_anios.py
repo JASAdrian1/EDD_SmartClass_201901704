@@ -42,6 +42,13 @@ class lista_anios:
                 tmp.meses.insertar_tarea(no_mes, tarea)
             tmp = tmp.siguiente
 
+    def buscar_tarea(self, no_anio, no_mes, tarea):
+        tmp = self.primero
+        while tmp is not None:
+            if no_anio == tmp.anio.no_anio:
+                tmp.meses.buscar_tarea(no_mes, tarea)
+            tmp = tmp.siguiente
+
     def verificar_anio_repetido(self,anio):
         tmp = self.primero
         if tmp is not None:

@@ -14,6 +14,8 @@ class Estudiante():
         self.edad = edad
         self.lista_de_anios = lista_anios()
 
+
+
     def imprimirInformacion(self):
         print("Carnet: ",self.carnet)
         print("DPI: ", self.dpi)
