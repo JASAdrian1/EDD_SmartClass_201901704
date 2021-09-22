@@ -28,10 +28,16 @@ class lista_mes:
         tmp = self.primero
         while tmp is not None:
             if mes == tmp.mes.no_mes:
-                print(tarea.materia)
+                #print(tarea.materia)
                 tmp.matriz_tareas.insertar(tarea,tarea.hora,tarea.dia)
             tmp = tmp.siguiente
 
+    def graficar_matriz_dispersa(self,mes):
+        tmp = self.primero
+        while tmp is not None:
+            if str(mes) == tmp.mes.no_mes:
+                tmp.matriz_tareas.graficar_matriz()
+            tmp = tmp.siguiente
 
     def buscar_tarea(self,mes,tarea):
         tmp = self.primero

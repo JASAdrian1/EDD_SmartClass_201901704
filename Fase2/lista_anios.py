@@ -49,6 +49,13 @@ class lista_anios:
                 tmp.meses.buscar_tarea(no_mes, tarea)
             tmp = tmp.siguiente
 
+    def graficar_matriz_dispersa(self, no_anio, no_mes):
+        tmp = self.primero
+        while tmp is not None:
+            if no_anio == tmp.anio.no_anio:
+                tmp.meses.graficar_matriz_dispersa(no_mes)
+            tmp = tmp.siguiente
+
     def verificar_anio_repetido(self,anio):
         tmp = self.primero
         if tmp is not None:

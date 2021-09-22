@@ -22,14 +22,15 @@ tarea2 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Mate","Finalizado","11/01/202
 tarea3 = tarea(201901704,"Adrian","efsgsfgdsfgdf","IPC","Finalizado","11/01/2020",2020,11,21,2)
 tarea4 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Quimica","Finalizado","11/01/2020",2020,5,7,4)
 tarea5 = tarea(201901704,"Adrian","efsgsfgdsfgdf","EDD","Finalizado","11/01/2020",2020,10,7,10)
-tarea6 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Compi","Finalizado","11/01/2020",2020,5,7,2)
+tarea6 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Compi","Finalizado","11/01/2020",2020,5,28,2)
 tarea7 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Orga","Finalizado","11/01/2020",2020,5,7,21)
 tarea8 = tarea(201901704,"Adrian","efsgsfgdsfgdf","IO1","Finalizado","11/01/2020",2020,10,7,4)
 tarea9 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Fisica","Finalizado","11/01/2020",2020,10,7,4)
 tarea10 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Seminario","Finalizado","11/01/2020",2020,10,7,11)
 tarea11 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Lenguajes","Finalizado","11/01/2020",2020,11,7,11)
 tarea12 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Materia","Finalizado","11/01/2020",2020,8,7,4)
-
+tarea13 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Archivos","Finalizado","11/01/2020",2020,8,28,8)
+tarea14 = tarea(201901704,"Adrian","efsgsfgdsfgdf","Logica","Finalizado","11/01/2020",2020,8,28,21)
 
 matriz_tareas = matriz()
 
@@ -45,7 +46,10 @@ matriz_tareas.insertar(tarea9,tarea9.hora,tarea9.dia)
 matriz_tareas.insertar(tarea10,tarea10.hora,tarea10.dia)
 matriz_tareas.insertar(tarea11,tarea11.hora,tarea11.dia)
 matriz_tareas.insertar(tarea12,tarea12.hora,tarea12.dia)
+matriz_tareas.insertar(tarea13,tarea13.hora,tarea13.dia)
+matriz_tareas.insertar(tarea14,tarea14.hora,tarea14.dia)
 
+matriz_tareas.eliminar(tarea11.hora,tarea11.dia)
 matriz_tareas.buscar_dato(tarea4.hora,tarea4.dia)
 matriz_tareas.graficar_matriz()
 matriz_tareas.imprimir_matriz()

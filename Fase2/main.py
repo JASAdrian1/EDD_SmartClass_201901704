@@ -28,13 +28,13 @@ def cargar():
         print("Se han cargado los estudiantes")
         tarea.cargar_tareas(texto, arbol_estudiantes)
         print("Se han cargado las tareas")
-        arbol_estudiantes.imprimir_lista(arbol_estudiantes.raiz)
+        #arbol_estudiantes.imprimir_lista(arbol_estudiantes.raiz)
     elif tipoArchivo == "curso":
         print("Sen han cargado los cursos")
 
     return jsonify({"Mensaje":"Se ha realizado la carga correctamente"})
 
-#*********METODOS PARA ARBOL ESTUDIANTE
+#*********METODOS PARA ARBOL ESTUDIANTE******************
 @app.route("/estudiante",methods=['POST'])
 def insertar_estudiante():
     global arbol_estudiantes
@@ -84,6 +84,34 @@ def eliminar_estudiante():
     return {"Mensaje":"Se ha eliminado al estudiante con exito"}
 
 
+#*********METODOS PARA TAREAS******************
+#Crear recordatorio
+@app.route("/recordatorios",methods=['POST'])
+def crear_recordatorios():
+    global arbol_estudiantes
+    carnet = request.json['Carnet']
+    nombre = request.json['Nombre']
+    descripcion = request.json['Descripcion']
+    materia = request.json['Materia']
+    fecha = request.json['Fecha']
+    hora = request.json['Hora']
+    estado = request.json['Estado']
+    no_anio = fecha.split("/")[2]
+    no_mes = fecha.split("/")[1]
+    dia = fecha.split("/")[0]
+    print(carnet)
+    print(dia)
+    print(no_anio)
+    print(no_mes)
+    nueva_tarea = tarea.tarea(carnet,nombre,descripcion,materia,estado,fecha,no_anio,no_mes,dia,hora)
+    arbol_estudiantes.insertar_anio(carnet, arbol_estudiantes.raiz, no_anio)
+    arbol_estudiantes.insertar_mes(carnet, arbol_estudiantes.raiz, no_anio, no_mes)
+    arbol_estudiantes.insertar_tarea(carnet, arbol_estudiantes.raiz, no_anio, no_mes, nueva_tarea)
+
+    return {'Mensaje':'Se ha guardado la tarea exitosamente'}
+
+
+#Conseguir informacion tarea
 @app.route("/recordatorios",methods=['GET'])
 def get_info_tarea():
     print("PENDIENTE")
@@ -94,6 +122,12 @@ def graficar():
     tipo_grafica = request.json['tipo']
     if tipo_grafica == 0:
         arbol_estudiantes.graficar()
+    elif tipo_grafica == 1:
+        carnet = request.json['carnet']
+        anio = request.json['año']
+        mes = request.json['mes']
+        arbol_estudiantes.graficar_matriz_dispersa(carnet,arbol_estudiantes.raiz,anio,mes)
+
     return {'Mensaje':'Se ha graficado el arbol correctamente'}
 
 

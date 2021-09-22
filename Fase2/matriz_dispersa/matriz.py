@@ -1,6 +1,7 @@
 from matriz_dispersa.lista_cabecera import lista_cabecera
 from matriz_dispersa.nodo_cabecera import nodo_cabecera
 from graphviz import Graph, Digraph, Source
+from operator import itemgetter
 
 
 class matriz:
@@ -24,6 +25,29 @@ class matriz:
 
         nodo_cabecera_x.lista_interna.insertarx(tarea,posx,posy)
         nodo_cabecera_y.lista_interna.insertary(tarea, posx, posy)
+
+    def eliminar(self,posx,posy):
+        tmp = self.cabeceras_filas.primero
+        while tmp is not None:
+            if posx == tmp.id:
+                tmp_dato = tmp.lista_interna.primero
+                while tmp_dato is not None:
+                    print("Se elimino: ", tmp_dato.tareas.primero.tarea.materia)
+                    if tmp_dato.anterior is None and tmp_dato.siguiente is None:
+                        aux = tmp
+                        aux.anterior.siguiente = tmp.siguiente
+                        aux.siguiente.anterior = tmp.anterior
+                        tmp = None
+                        aux = None
+                        return
+                        #tmp.lista_interna = None
+                    aux = tmp_dato
+                    tmp_dato.anterior = tmp_dato.siguiente
+                    tmp_dato.siguiente = tmp_dato.anterior
+                    tmp_dato = None
+                    break
+                    tmp_dato = tmp_dato.siguiente
+            tmp = tmp.siguiente
 
     def buscar_dato(self,posx,posy):
         tmp = self.cabeceras_filas.primero
@@ -73,11 +97,13 @@ class matriz:
             cadena += "c" + str(nodo_cabecera_columna.id) + '[label="' + str(nodo_cabecera_columna.id) + '"]\n'
             nodo_cabecera_columna = nodo_cabecera_columna.siguiente
 
+        #SE GRAFICAN LA CABECERA DE LAS FILAS
         nodo_cabecera_fila =self.cabeceras_filas.primero
-        #cadena+="rankdir='LR'\n"
         cadena+="subgraph cabecera_fila{\n"
         cadena+='rank="same";\n'
+        #SE CONECTA EL NODO RAIZ CON LA CABECERA FILA
         cadena += '"" -> f' + str(nodo_cabecera_fila.id) + "\n"
+        # SE GRAFICAN LA UNION DE LA CABECERA DE LAS FILAS
         while nodo_cabecera_fila is not None:
             if nodo_cabecera_fila.siguiente is None:
                 cadena += 'f' + str(nodo_cabecera_fila.id)
@@ -86,6 +112,7 @@ class matriz:
             nodo_cabecera_fila = nodo_cabecera_fila.siguiente
         cadena+=";\n}\n"
 
+        #SE GRAFICAN LA UNION DE LA CABECERA DE LAS COLUMNAS
         cadena += "subgraph cabecera_columna{\n"
         cadena += 'rankdir="LR";\n'
         nodo_cabecera_columna = self.cabeceras_columnas.primero
@@ -94,27 +121,36 @@ class matriz:
             nodo_cabecera_columna = nodo_cabecera_columna.siguiente
         cadena+="\n}\n"
 
+        #CREACION DE LOS NODOS INTERNOS DE LA MATRIZ
         nodo_cabecera_fila = self.cabeceras_filas.primero
-        lista_nodo_internos = []
+        lista_nodo_internos = [] #LISTA PARA GUARDAR TODOS LOS NODOS PARA RECORRER POSTERIORMENTE
         while nodo_cabecera_fila is not None:
             tmp_dato_interno = nodo_cabecera_fila.lista_interna.primero
             while tmp_dato_interno is not None:
                 cadena += "ni" + str(tmp_dato_interno.posx) +str(tmp_dato_interno.posy) + '[label="' + str(tmp_dato_interno.tareas.primero.tarea.materia)+'"]\n'
-                lista_nodo_internos.append(("ni" + str(tmp_dato_interno.posx) +str(tmp_dato_interno.posy),tmp_dato_interno.posx,tmp_dato_interno.posy))
+                lista_nodo_internos.append(["ni" + str(tmp_dato_interno.posx) +str(tmp_dato_interno.posy),tmp_dato_interno.posx,tmp_dato_interno.posy])
                 #print(tmp_dato_interno.posx,", ",tmp_dato_interno.posy)
                 tmp_dato_interno = tmp_dato_interno.siguiente
             nodo_cabecera_fila = nodo_cabecera_fila.siguiente
 
-        nodo_cabecera_fila = self.cabeceras_filas.primero
+        # SE CONECTA EL NODO RAIZ CON LA CABECERA COLUMNA
         nodo_cabecera_columna = self.cabeceras_columnas.primero
         cadena += '"" -> c' + str(nodo_cabecera_columna.id) + "[rank = same]\n"
 
         contador = 0
         ultimo_nodo = ""
         cerrar_grafo = False
-        for j in range(0,24,1):
-            for i in range(0,30,1):
+        print(lista_nodo_internos)
+        #RECORRIDO PARA GRAFICAR LOS NODOS VERTICALEMTE
+        for j in range(0,31,1):
+            for i in range(0,24,1):
                 for k in range(0, len(lista_nodo_internos)):
+                    if(type(lista_nodo_internos[k][1]) == str):
+                        lista_nodo_internos[k][1] =int(lista_nodo_internos[k][1])
+                    if (type(lista_nodo_internos[k][2]) == str):
+                        lista_nodo_internos[k][2] = int(lista_nodo_internos[k][2])
+                    #print(type(lista_nodo_internos[k][2]))
+                    #print(lista_nodo_internos[k][1]," == ",i," ---- ",lista_nodo_internos[k][2]," == ",j)
                     if lista_nodo_internos[k][1] == i and lista_nodo_internos[k][2] == j:
                         if contador == 0: #Contador para ver si se debe conenctar con la cabecera o no
                             cadena += "\nsubgraph dato_columna" + str(j) + "{\n"
@@ -137,8 +173,13 @@ class matriz:
             ultimo_nodo = ""
             contador = 0
 
+        # RECORRIDO PARA GRAFICAR LOS NODOS HOLRIZONTALMENTE
         for i in range(0,24,1):
-            for j in range(0,30,1):
+            for j in range(0,31,1):
+                if (type(lista_nodo_internos[k][1]) == str):
+                    lista_nodo_internos[k][1] = int(lista_nodo_internos[k][1])
+                if (type(lista_nodo_internos[k][2]) == str):
+                    lista_nodo_internos[k][2] = int(lista_nodo_internos[k][2])
                 for k in range(0, len(lista_nodo_internos)):
                     if lista_nodo_internos[k][1] == i and lista_nodo_internos[k][2] == j:
                         if contador == 0: #Contador para ver si se debe conenctar con la cabecera o no
@@ -146,7 +187,7 @@ class matriz:
                             ultimo_nodo = lista_nodo_internos[k][0]
                             contador+=1
                         else:
-                            cadena+=ultimo_nodo+"->"+lista_nodo_internos[k][0]+"\n"
+                            cadena+=ultimo_nodo+"->"+lista_nodo_internos[k][0]+"[rank=\"same\"]\n"
                         #cadena+="c"+str(j)+" -> "+lista_nodo_internos[k][0]+"\n"
             ultimo_nodo = ""
             contador = 0
@@ -167,7 +208,6 @@ class matriz:
                 subtmp.tareas.imprimir_lista()
                 subtmp = subtmp.siguiente
             tmp = tmp.siguiente
-
 
         print("**************DIAS*************")
         tmp = self.cabeceras_columnas.primero

@@ -31,7 +31,6 @@ class Arbol_avl:
                 raiz.derecha = self.insertar_nodo_posicion(nuevo,id,raiz.derecha)
                 if (self.altura(raiz.derecha)-self.altura(raiz.izquierda) == 2):
                     if nuevo.id > raiz.derecha.id:
-                        print(raiz)
                         raiz = self.rotacion_derecha(raiz)
                     else:
                         raiz = self.rotacion_derecha_izquierda(raiz)
@@ -179,6 +178,7 @@ class Arbol_avl:
             self.insertar_tarea(carnet, raiz.derecha,no_anio,no_mes,tarea)
 
 
+
     def buscar_tarea(self, carnet, raiz, no_anio, no_mes, tarea):
         if raiz is not None:
             # print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
@@ -187,6 +187,16 @@ class Arbol_avl:
                 raiz.estudiante.lista_de_anios.insertar_tarea(no_anio, no_mes, tarea)
             self.buscar_tarea(carnet, raiz.izquierda, no_anio, no_mes, tarea)
             self.buscar_tarea(carnet, raiz.derecha, no_anio, no_mes, tarea)
+
+
+    def graficar_matriz_dispersa(self, carnet, raiz, no_anio, no_mes):
+        if raiz is not None:
+            # print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                # print(tarea.materia)
+                raiz.estudiante.lista_de_anios.graficar_matriz_dispersa(no_anio, no_mes)
+            self.graficar_matriz_dispersa(carnet, raiz.izquierda, no_anio, no_mes)
+            self.graficar_matriz_dispersa(carnet, raiz.derecha, no_anio, no_mes)
 
 
     def imprimir_lista(self, raiz):
@@ -213,8 +223,11 @@ class Arbol_avl:
         Archivo = open(nombre_archivo, "w+")
         Archivo.write(cadena)
         Archivo.close()
-        s = Source.from_file(nombre_archivo)
-        s.view()
+        try:
+            s = Source.from_file(nombre_archivo)
+            s.view()
+        except:
+            print("Por favor cierre el archivo de la grafica y vuelva a realizar la peticion")
 
     def listar(self, raiz_actual):
         if raiz_actual:
