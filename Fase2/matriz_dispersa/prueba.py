@@ -49,8 +49,10 @@ matriz_tareas.insertar(tarea12,tarea12.hora,tarea12.dia)
 matriz_tareas.insertar(tarea13,tarea13.hora,tarea13.dia)
 matriz_tareas.insertar(tarea14,tarea14.hora,tarea14.dia)
 
-matriz_tareas.eliminar(tarea11.hora,tarea11.dia)
+#matriz_tareas.eliminar(tarea11.hora,tarea11.dia)
 matriz_tareas.buscar_dato(tarea4.hora,tarea4.dia)
+matriz_tareas.get_informacion_tareas(tarea11.dia,tarea11.hora)
+matriz_tareas.graficar_tareas(tarea12.dia,tarea12.hora)
 matriz_tareas.graficar_matriz()
-matriz_tareas.imprimir_matriz()
+#matriz_tareas.imprimir_matriz()
 

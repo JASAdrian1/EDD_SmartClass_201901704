@@ -39,6 +39,20 @@ class lista_mes:
                 tmp.matriz_tareas.graficar_matriz()
             tmp = tmp.siguiente
 
+    def get_informacion_tareas(self,mes,dia,hora):
+        tmp = self.primero
+        while tmp is not None:
+            if str(mes) == tmp.mes.no_mes:
+                return tmp.matriz_tareas.get_informacion_tareas(dia,hora)
+            tmp = tmp.siguiente
+
+    def graficar_tareas(self,mes,dia,hora):
+        tmp = self.primero
+        while tmp is not None:
+            if str(mes) == tmp.mes.no_mes:
+                return tmp.matriz_tareas.graficar_tareas(dia,hora)
+            tmp = tmp.siguiente
+
     def buscar_tarea(self,mes,tarea):
         tmp = self.primero
         while tmp is not None:

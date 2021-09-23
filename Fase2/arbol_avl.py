@@ -198,6 +198,25 @@ class Arbol_avl:
             self.graficar_matriz_dispersa(carnet, raiz.izquierda, no_anio, no_mes)
             self.graficar_matriz_dispersa(carnet, raiz.derecha, no_anio, no_mes)
 
+    def get_informacion_tareas(self, carnet, raiz, no_anio, no_mes,dia,hora,lista_tareas):
+        if raiz is not None:
+            # print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                # print(tarea.materia)
+                print(raiz.estudiante.lista_de_anios.get_informacion_tareas(no_anio, no_mes,dia,hora))
+                lista_tareas.append(raiz.estudiante.lista_de_anios.get_informacion_tareas(no_anio, no_mes,dia,hora))
+                print(lista_tareas)
+            self.get_informacion_tareas(carnet, raiz.izquierda, no_anio, no_mes,dia,hora,lista_tareas)
+            self.get_informacion_tareas(carnet, raiz.derecha, no_anio, no_mes,dia,hora,lista_tareas)
+
+
+    def graficar_tareas(self, carnet, raiz, no_anio, no_mes,dia,hora):
+        if raiz is not None:
+            if str(raiz.estudiante.carnet) == str(carnet):
+                raiz.estudiante.lista_de_anios.graficar_tareas(no_anio, no_mes, dia, hora)
+            self.graficar_tareas(carnet, raiz.izquierda, no_anio, no_mes,dia,hora)
+            self.graficar_tareas(carnet, raiz.derecha, no_anio, no_mes,dia,hora)
+
 
     def imprimir_lista(self, raiz):
         if raiz is not None:

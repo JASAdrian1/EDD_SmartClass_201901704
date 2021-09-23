@@ -127,7 +127,7 @@ class matriz:
         while nodo_cabecera_fila is not None:
             tmp_dato_interno = nodo_cabecera_fila.lista_interna.primero
             while tmp_dato_interno is not None:
-                cadena += "ni" + str(tmp_dato_interno.posx) +str(tmp_dato_interno.posy) + '[label="' + str(tmp_dato_interno.tareas.primero.tarea.materia)+'"]\n'
+                cadena += "ni" + str(tmp_dato_interno.posx) +str(tmp_dato_interno.posy) + '[label="' + str(tmp_dato_interno.tareas.longitud())+'"]\n'
                 lista_nodo_internos.append(["ni" + str(tmp_dato_interno.posx) +str(tmp_dato_interno.posy),tmp_dato_interno.posx,tmp_dato_interno.posy])
                 #print(tmp_dato_interno.posx,", ",tmp_dato_interno.posy)
                 tmp_dato_interno = tmp_dato_interno.siguiente
@@ -197,6 +197,47 @@ class matriz:
 
     def get_posx(self,elemento):
         return elemento[1]
+
+    #Metodo para peticion get de recordatorios
+    def get_informacion_tareas(self,dia,hora):
+        if type(dia) == str:
+            dia=int(dia)
+        if type(hora) == str:
+            hora=int(hora)
+        tmp = self.cabeceras_filas.primero
+        while tmp is not None:
+            subtmp = tmp.lista_interna.primero  #Se accede a lista interna dentro del nodo cabecera
+            while subtmp is not None:
+                #print(subtmp.posx," == ",hora," ---- ",subtmp.posy, " == " ,dia)
+                if type(subtmp.posx == str):
+                    subtmp.posx = int(subtmp.posx)
+                if type(subtmp.posy == str):
+                    subtmp.posy = int(subtmp.posy)
+                if subtmp.posx == hora and subtmp.posy == dia:
+                    #print("Hora: ",subtmp.posx," Dia: ",subtmp.posy)
+                    return subtmp.tareas.get_reporte_tareas()
+                subtmp = subtmp.siguiente
+            tmp = tmp.siguiente
+
+    def graficar_tareas(self, dia, hora):
+        if type(dia) == str:
+            dia = int(dia)
+        if type(hora) == str:
+            hora = int(hora)
+        tmp = self.cabeceras_filas.primero
+        while tmp is not None:
+            subtmp = tmp.lista_interna.primero  # Se accede a lista interna dentro del nodo cabecera
+            while subtmp is not None:
+                if type(subtmp.posx == str):
+                    subtmp.posx = int(subtmp.posx)
+                if type(subtmp.posy == str):
+                    subtmp.posy = int(subtmp.posy)
+                if subtmp.posx == hora and subtmp.posy == dia:
+                    subtmp.tareas.graficar()
+                    break
+                    break
+                subtmp = subtmp.siguiente
+            tmp = tmp.siguiente
 
     def imprimir_matriz(self):
         print("**************HORAS*************")

@@ -6,6 +6,7 @@ import tarea
 
 arbol_estudiantes = Arbol_avl()
 info_estudiante = []
+lista_reportes_tareas = []
 
 
 app = Flask(__name__)
@@ -73,8 +74,11 @@ def get_estudiante():
     global info_estudiante
     carnet = request.json['carnet']
     arbol_estudiantes.get_informacion_estudiante(carnet,arbol_estudiantes.raiz,info_estudiante)
-    print(info_estudiante[0])
-    return info_estudiante[0]
+    if len(info_estudiante)>0:
+        print(info_estudiante[0])
+        return info_estudiante[0]
+    else:
+        return {'Mensaje':'No se ha encontrado al estudiante'}
 
 @app.route("/estudiante",methods=['DELETE'])
 def eliminar_estudiante():
@@ -99,10 +103,6 @@ def crear_recordatorios():
     no_anio = fecha.split("/")[2]
     no_mes = fecha.split("/")[1]
     dia = fecha.split("/")[0]
-    print(carnet)
-    print(dia)
-    print(no_anio)
-    print(no_mes)
     nueva_tarea = tarea.tarea(carnet,nombre,descripcion,materia,estado,fecha,no_anio,no_mes,dia,hora)
     arbol_estudiantes.insertar_anio(carnet, arbol_estudiantes.raiz, no_anio)
     arbol_estudiantes.insertar_mes(carnet, arbol_estudiantes.raiz, no_anio, no_mes)
@@ -114,9 +114,22 @@ def crear_recordatorios():
 #Conseguir informacion tarea
 @app.route("/recordatorios",methods=['GET'])
 def get_info_tarea():
-    print("PENDIENTE")
-    return {'Mensaje':'Pendiente'}
+    global arbol_estudiantes
+    global lista_reportes_tareas
+    carnet = request.json['Carnet']
+    fecha = request.json['Fecha']
+    hora = request.json['Hora']
+    no_anio = fecha.split("/")[2]
+    no_mes = fecha.split("/")[1]
+    dia = fecha.split("/")[0]
+    arbol_estudiantes.get_informacion_tareas(carnet,arbol_estudiantes.raiz,no_anio,no_mes,dia,hora,lista_reportes_tareas)
+    if len(lista_reportes_tareas)>0:
+        json_tareas = jsonify(lista_reportes_tareas)
+        return json_tareas
+    return {'Mensaje':'No se ha encontrado ninguna tarea que coincida con los datos proporcionados'}
 
+
+#****************REPORTES***********************
 @app.route("/reporte", methods =['GET'])
 def graficar():
     tipo_grafica = request.json['tipo']
@@ -127,7 +140,13 @@ def graficar():
         anio = request.json['año']
         mes = request.json['mes']
         arbol_estudiantes.graficar_matriz_dispersa(carnet,arbol_estudiantes.raiz,anio,mes)
-
+    elif tipo_grafica == 2:
+        carnet = request.json['carnet']
+        anio = request.json['año']
+        mes = request.json['mes']
+        dia = request.json['dia']
+        hora = request.json['hora']
+        arbol_estudiantes.graficar_tareas(carnet,arbol_estudiantes.raiz,anio,mes,dia,hora)
     return {'Mensaje':'Se ha graficado el arbol correctamente'}
 
 
