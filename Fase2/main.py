@@ -2,9 +2,12 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import estudiante
 from arbol_avl import Arbol_avl
+from arbol_b.arbol_b_cursos import Arbol_B
 import tarea
+import json
 
 arbol_estudiantes = Arbol_avl()
+arbol_pensum = Arbol_B()
 info_estudiante = []
 lista_reportes_tareas = []
 
@@ -19,6 +22,7 @@ def inicio():
 
 @app.route("/carga", methods =['POST'])
 def cargar():
+    import io
     global arbol_estudiantes
     path = request.json['path']
     tipoArchivo = request.json['tipo']
@@ -31,11 +35,15 @@ def cargar():
         print("Se han cargado las tareas")
         #arbol_estudiantes.imprimir_lista(arbol_estudiantes.raiz)
     elif tipoArchivo == "curso":
-        print("Sen han cargado los cursos")
+        from arbol_b.curso import cargar_cursos
+        file = open(path, encoding="latin-1")
+        texto = file.read()
+        texto = json.loads(texto)
+        cargar_cursos(texto,arbol_estudiantes,arbol_pensum)
 
     return jsonify({"Mensaje":"Se ha realizado la carga correctamente"})
 
-#*********METODOS PARA ARBOL ESTUDIANTE******************
+#*************METODOS PARA ARBOL ESTUDIANTE******************
 @app.route("/estudiante",methods=['POST'])
 def insertar_estudiante():
     global arbol_estudiantes
@@ -146,7 +154,14 @@ def graficar():
         mes = request.json['mes']
         dia = request.json['dia']
         hora = request.json['hora']
-        arbol_estudiantes.graficar_tareas(carnet,arbol_estudiantes.raiz,anio,mes,dia,hora)
+        arbol_estudiantes.graficar_tareas(carnet, arbol_estudiantes.raiz, anio, mes, dia, hora)
+    elif tipo_grafica == 3:
+        arbol_pensum.graficar()
+    elif tipo_grafica == 4:
+        carnet = request.json['carnet']
+        anio = request.json['año']
+        semestre = request.json['semestre']
+        arbol_estudiantes.graficar_arbol_cursos(carnet,arbol_estudiantes.raiz,anio,semestre)
     return {'Mensaje':'Se ha graficado el arbol correctamente'}
 
 

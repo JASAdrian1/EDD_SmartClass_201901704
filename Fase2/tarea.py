@@ -28,24 +28,23 @@ def cargar_tareas(texto,arbol_estudiantes):
     texto_analizado = parser.parse(texto)
     for item in texto_analizado:
         if item['type'] == "task":
-            contador = 0
             for atributo in item['atributos']:
                 try:
-                    if contador == 0:
-                        carnet = atributo['Carnet']
-                    if contador == 1:
-                        nombre = atributo['Nombre']
-                    if contador == 2:
-                        descripcion = atributo['Descripcion']
-                    if contador == 3:
-                        materia = atributo['Materia']
-                    if contador == 4:
-                        fecha = atributo['Fecha']
-                    if contador == 5:
-                        hora = atributo['Hora']
-                    if contador == 6:
-                        estado = atributo['Estado']
-                    contador += 1
+                    for key in list(atributo):
+                        if key == "Carnet":
+                            carnet = atributo['Carnet']
+                        elif key == "Nombre":
+                            nombre = atributo['Nombre']
+                        elif key == "Descripcion":
+                            descripcion = atributo['Descripcion']
+                        elif key == "Materia":
+                            materia = atributo['Materia']
+                        elif key == "Fecha":
+                            fecha = atributo['Fecha']
+                        elif key == "Hora":
+                            hora = atributo['Hora']
+                        elif key == "Estado":
+                            estado = atributo['Estado']
                 except:
                     print(atributo)
                     print("La estructura de este estudiante no era la correcta")

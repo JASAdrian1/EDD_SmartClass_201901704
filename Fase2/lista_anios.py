@@ -62,6 +62,7 @@ class lista_anios:
             if no_anio == tmp.anio.no_anio:
                 return tmp.meses.get_informacion_tareas(no_mes,dia,hora)
             tmp = tmp.siguiente
+        print("No se ha encontrado la tarea (Funcion get_informacion_tareas -- lista_anios)")
 
     def graficar_tareas(self, no_anio, no_mes,dia,hora):
         tmp = self.primero
@@ -69,6 +70,35 @@ class lista_anios:
             if no_anio == tmp.anio.no_anio:
                 return tmp.meses.graficar_tareas(no_mes,dia,hora)
             tmp = tmp.siguiente
+
+    def insertar_semestre(self, no_anio, no_semestre):
+        # print("Año: "+no_anio+" Mes: "+no_mes)
+        tmp = self.primero
+        while tmp is not None:
+            # print(no_anio + " == " + tmp.anio.no_anio)
+            if no_anio == tmp.anio.no_anio:
+                #print("Se inserto en el año ",no_anio)
+                tmp.semestres.insertar(no_semestre)
+            tmp = tmp.siguiente
+
+    def insertar_curso(self, no_anio, no_semestre,curso):
+        tmp = self.primero
+        while tmp is not None:
+            # print(no_anio + " == " + tmp.anio.no_anio)
+            if no_anio == tmp.anio.no_anio:
+                #print("Se inserto en el año ",no_anio)
+                tmp.semestres.insertar_curso(no_semestre,curso)
+            tmp = tmp.siguiente
+
+    def graficar_arbol_cursos(self, no_anio, no_semestre):
+        tmp = self.primero
+        while tmp is not None:
+            if no_anio == tmp.anio.no_anio:
+                tmp.semestres.graficar_arbol_cursos(no_semestre)
+                return
+            tmp = tmp.siguiente
+        print("No se ha podido graficar ya que no se ha encontrado el año")
+
 
     def verificar_anio_repetido(self,anio):
         tmp = self.primero

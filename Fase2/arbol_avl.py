@@ -177,7 +177,32 @@ class Arbol_avl:
             self.insertar_tarea(carnet, raiz.izquierda,no_anio,no_mes,tarea)
             self.insertar_tarea(carnet, raiz.derecha,no_anio,no_mes,tarea)
 
+    def insertar_semestre(self,carnet,raiz,no_anio,no_semestre):
+        if raiz is not None:
+            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                #print("Se inserto el semestre al estudiante ",carnet)
+                raiz.estudiante.lista_de_anios.insertar_semestre(no_anio,no_semestre)
+            self.insertar_semestre(carnet, raiz.izquierda,no_anio,no_semestre)
+            self.insertar_semestre(carnet, raiz.derecha,no_anio,no_semestre)
 
+
+    def insertar_curso(self,carnet,raiz,no_anio,no_semestre,curso):
+        if raiz is not None:
+            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                #print("Se inserto el semestre al estudiante ",carnet)
+                raiz.estudiante.lista_de_anios.insertar_curso(no_anio,no_semestre,curso)
+            self.insertar_curso(carnet, raiz.izquierda,no_anio,no_semestre,curso)
+            self.insertar_curso(carnet, raiz.derecha,no_anio,no_semestre,curso)
+
+
+    def graficar_arbol_cursos(self,carnet,raiz,no_anio,no_semestre):
+        if raiz is not None:
+            if str(raiz.estudiante.carnet) == str(carnet):
+                raiz.estudiante.lista_de_anios.graficar_arbol_cursos(no_anio,no_semestre)
+            self.graficar_arbol_cursos(carnet, raiz.izquierda,no_anio,no_semestre)
+            self.graficar_arbol_cursos(carnet, raiz.derecha,no_anio,no_semestre)
 
     def buscar_tarea(self, carnet, raiz, no_anio, no_mes, tarea):
         if raiz is not None:

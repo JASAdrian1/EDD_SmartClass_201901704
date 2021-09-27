@@ -38,24 +38,23 @@ def cargarEstudiantes(texto,arbol_estudiantes):
     texto_analizado = parser.parse(texto)
     for item in texto_analizado:
         if item['type'] == "user":
-            contador = 0
             for atributo in item['atributos']:
                 try:
-                    if contador == 0:
-                        carnet = atributo['Carnet']
-                    if contador == 1:
-                        dpi = atributo['DPI']
-                    if contador == 2:
-                        nombre = atributo['Nombre']
-                    if contador == 3:
-                        carrera = atributo['Carrera']
-                    if contador == 4:
-                        password = atributo['Password']
-                    if contador == 5:
-                        creditos = atributo['Creditos']
-                    if contador == 6:
-                        edad = atributo['Edad']
-                    contador += 1
+                    for key in list(atributo):
+                        if key == "Carnet":
+                            carnet = atributo['Carnet']
+                        elif key == "DPI":
+                            dpi = atributo['DPI']
+                        elif key == "Nombre":
+                            nombre = atributo['Nombre']
+                        elif key == "Carrera":
+                            carrera = atributo['Carrera']
+                        elif key == "Password":
+                            password = atributo['Password']
+                        elif key == "Creditos":
+                            creditos = atributo['Creditos']
+                        elif key == "Edad":
+                            edad = atributo['Edad']
                 except:
                     print(atributo)
                     print("La estructura de este estudiante no era la correcta")
