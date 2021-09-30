@@ -228,12 +228,19 @@ class Arbol_avl:
             # print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
             if str(raiz.estudiante.carnet) == str(carnet):
                 # print(tarea.materia)
-                print(raiz.estudiante.lista_de_anios.get_informacion_tareas(no_anio, no_mes,dia,hora))
                 lista_tareas.append(raiz.estudiante.lista_de_anios.get_informacion_tareas(no_anio, no_mes,dia,hora))
                 print(lista_tareas)
             self.get_informacion_tareas(carnet, raiz.izquierda, no_anio, no_mes,dia,hora,lista_tareas)
             self.get_informacion_tareas(carnet, raiz.derecha, no_anio, no_mes,dia,hora,lista_tareas)
 
+    def eliminar_tarea(self, carnet, raiz, no_anio, no_mes,dia,hora,id):
+        if raiz is not None:
+            # print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+            if str(raiz.estudiante.carnet) == str(carnet):
+                # print(tarea.materia)
+                raiz.estudiante.lista_de_anios.eliminar_tarea(no_anio, no_mes,dia,hora,id)
+            self.eliminar_tarea(carnet, raiz.izquierda, no_anio, no_mes,dia,hora,id)
+            self.eliminar_tarea(carnet, raiz.derecha, no_anio, no_mes,dia,hora,id)
 
     def graficar_tareas(self, carnet, raiz, no_anio, no_mes,dia,hora):
         if raiz is not None:

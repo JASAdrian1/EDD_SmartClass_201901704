@@ -64,6 +64,16 @@ class lista_anios:
             tmp = tmp.siguiente
         print("No se ha encontrado la tarea (Funcion get_informacion_tareas -- lista_anios)")
 
+
+    def eliminar_tarea(self, no_anio, no_mes,dia,hora,id):
+        #print("Ingreso al metodo eliminar tarea en la lista de años")
+        tmp = self.primero
+        while tmp is not None:
+            if no_anio == tmp.anio.no_anio:
+                return tmp.meses.eliminar_tarea(no_mes,dia,hora,id)
+            tmp = tmp.siguiente
+        print("No se ha encontrado la tarea (Funcion get_informacion_tareas -- lista_anios)")
+
     def graficar_tareas(self, no_anio, no_mes,dia,hora):
         tmp = self.primero
         while tmp is not None:

@@ -36,7 +36,7 @@ def cargar():
         #arbol_estudiantes.imprimir_lista(arbol_estudiantes.raiz)
     elif tipoArchivo == "curso":
         from arbol_b.curso import cargar_cursos
-        file = open(path, encoding="latin-1")
+        file = open(path, encoding="utf-8")
         texto = file.read()
         texto = json.loads(texto)
         cargar_cursos(texto,arbol_estudiantes,arbol_pensum)
@@ -134,8 +134,41 @@ def get_info_tarea():
     if len(lista_reportes_tareas)>0:
         json_tareas = jsonify(lista_reportes_tareas)
         return json_tareas
-    return {'Mensaje':'No se ha encontrado ninguna tarea que coincida con los datos proporcionados'}
+    return {'Mensaje':'Informacion obtenida correctamente'}
 
+
+#Eliminar tarea
+@app.route("/recordatorios",methods=['DELETE'])
+def eliminar_tarea():
+    global arbol_estudiantes
+    global lista_reportes_tareas
+    carnet = request.json['Carnet']
+    id = request.json['id']
+    fecha = request.json['Fecha']
+    hora = request.json['Hora']
+    no_anio = fecha.split("/")[2]
+    no_mes = fecha.split("/")[1]
+    dia = fecha.split("/")[0]
+    arbol_estudiantes.eliminar_tarea(carnet,arbol_estudiantes.raiz,no_anio,no_mes,dia,hora,id)
+
+    return {'Mensaje':'Se ha eliminado la tarea correctamente'}
+
+#*********METODOS PARA TAREAS******************
+@app.route("/cursosEstudiante",methods=['POST'])
+def insertar_curso_estudiante():
+    from arbol_b.curso import cargar_cursos
+    texto = request.json
+    print(texto)
+    cargar_cursos(texto, arbol_estudiantes, arbol_pensum)
+    return {"Mensaje":"Se han insertado los cursos correctamente"}
+
+@app.route("/cursosPensum",methods=['POST'])
+def insertar_curso_pensum():
+    from arbol_b.curso import cargar_cursos
+    texto = request.json
+    print(texto)
+    cargar_cursos(texto, arbol_estudiantes, arbol_pensum)
+    return {"Mensaje":"Se han insertado los cursos correctamente"}
 
 #****************REPORTES***********************
 @app.route("/reporte", methods =['GET'])

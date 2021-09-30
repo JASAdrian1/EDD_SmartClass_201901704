@@ -46,6 +46,13 @@ class lista_mes:
                 return tmp.matriz_tareas.get_informacion_tareas(dia,hora)
             tmp = tmp.siguiente
 
+    def eliminar_tarea(self,mes,hora,dia,id):
+        tmp = self.primero
+        while tmp is not None:
+            if str(mes) == tmp.mes.no_mes:
+                return tmp.matriz_tareas.eliminar(dia,hora,id)
+            tmp = tmp.siguiente
+
     def graficar_tareas(self,mes,dia,hora):
         tmp = self.primero
         while tmp is not None:

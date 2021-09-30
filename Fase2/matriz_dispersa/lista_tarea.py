@@ -7,7 +7,8 @@ class lista_tarea:
     def __init__(self):
         self.primero = None
 
-    def insertar(self,tarea):
+
+    def insertar(self, tarea):
         nuevo_nodo = nodo_tarea(tarea)
         if self.primero is None:
             self.primero = nuevo_nodo
@@ -15,7 +16,36 @@ class lista_tarea:
             tmp = self.primero
             while tmp.siguiente is not None:
                 tmp = tmp.siguiente
+
+            aux = tmp
             tmp.siguiente = nuevo_nodo
+            nuevo_nodo.anterior = aux
+
+
+
+
+    def eliminar(self,id):
+        print("Entro al metodo eliminar")
+        contador = 0
+        tmp = self.primero
+        while tmp is not None:
+            contador += 1
+            if contador ==id:
+                print("Se ha eliminado ", tmp.tarea.materia)
+                if tmp.anterior is not None:
+                    aux = tmp
+                    tmp.anterior.siguiente = aux.siguiente
+                    tmp.siguiente.anterior = aux.anterior
+                    del aux
+                    return
+                else:
+                    aux = tmp
+                    self.primero = tmp.siguiente
+                    del tmp
+                    return
+            tmp = tmp.siguiente
+
+        print("No se ha encontrado la tarea a eliminar")
 
     def longitud(self):
         contador = 0

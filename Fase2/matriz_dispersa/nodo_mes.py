@@ -6,4 +6,4 @@ class nodo_mes:
         self.mes = mes
         self.matriz_tareas = matriz()
         self.siguiente = None
-        self.anterios = None
+        self.anterior = None

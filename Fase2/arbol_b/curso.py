@@ -32,11 +32,11 @@ def cargar_cursos(texto,arbol_estudiantes,arbol_pensum):
                             prere = cursos["Prerequisitos"]
                             obligatorio = cursos["Obligatorio"]
                             nuevo_curso = curso(codigo,nombre,creditos,prere,obligatorio)
-                        #Se inserta el año al estudiante si el año no existe en su usuario
-                        arbol_estudiantes.insertar_anio(carnet, arbol_estudiantes.raiz, no_anio)
-                        #Se inserta el semetre al año correspondiente
-                        arbol_estudiantes.insertar_semestre(carnet,arbol_estudiantes.raiz,no_anio,no_semestre)
-                        arbol_estudiantes.insertar_curso(carnet,arbol_estudiantes.raiz,no_anio,no_semestre,nuevo_curso)
+                            #Se inserta el año al estudiante si el año no existe en su usuario
+                            arbol_estudiantes.insertar_anio(carnet, arbol_estudiantes.raiz, no_anio)
+                            #Se inserta el semetre al año correspondiente
+                            arbol_estudiantes.insertar_semestre(carnet,arbol_estudiantes.raiz,no_anio,no_semestre)
+                            arbol_estudiantes.insertar_curso(carnet,arbol_estudiantes.raiz,no_anio,no_semestre,nuevo_curso)
         elif key == "Cursos":
             print(texto["Cursos"])
             texto = texto["Cursos"]

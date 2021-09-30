@@ -102,7 +102,7 @@ class Arbol_B:
             tmp = raiz.claves.primero
             while tmp is not None:
                 contador+=1
-                nodos+='|{'+str(tmp.curso.codigo)+"\\n"+tmp.curso.nombre+'}|<p'+str(contador)+'> '
+                nodos+='|{'+str(tmp.curso.codigo)+'}|<p'+str(contador)+'> '
                 tmp = tmp.siguiente
             nodos+= '"]'+str(raiz.claves.primero.curso.codigo)+'; \n'
             return nodos
@@ -112,7 +112,7 @@ class Arbol_B:
             tmp = raiz.claves.primero
             while tmp is not None:
                 contador+=1
-                nodos+= '|{'+str(tmp.curso.codigo)+"\\n"+tmp.curso.nombre+'}|<p'+str(contador)+'> '
+                nodos+= '|{'+str(tmp.curso.codigo)+'}|<p'+str(contador)+'> '
                 tmp = tmp.siguiente
             nodos+= '"]'+str(raiz.claves.primero.curso.codigo)+'; \n'
 

@@ -26,28 +26,23 @@ class matriz:
         nodo_cabecera_x.lista_interna.insertarx(tarea,posx,posy)
         nodo_cabecera_y.lista_interna.insertary(tarea, posx, posy)
 
-    def eliminar(self,posx,posy):
+    def eliminar(self,posx,posy,id):
+        print("Se elimino tarea en dia: ",posy," y hora: ",posx)
         tmp = self.cabeceras_filas.primero
         while tmp is not None:
-            if posx == tmp.id:
+            print(posx, " == ",tmp.id)
+            #print(type(posx),type(tmp.id),sep="\n")
+            if str(posx) == tmp.id:
                 tmp_dato = tmp.lista_interna.primero
                 while tmp_dato is not None:
-                    print("Se elimino: ", tmp_dato.tareas.primero.tarea.materia)
-                    if tmp_dato.anterior is None and tmp_dato.siguiente is None:
-                        aux = tmp
-                        aux.anterior.siguiente = tmp.siguiente
-                        aux.siguiente.anterior = tmp.anterior
-                        tmp = None
-                        aux = None
+                    print(posy," == ",tmp_dato.posy)
+                    if str(tmp_dato.posy) == str(posy):
+                        tmp_dato.tareas.eliminar(id)
                         return
-                        #tmp.lista_interna = None
-                    aux = tmp_dato
-                    tmp_dato.anterior = tmp_dato.siguiente
-                    tmp_dato.siguiente = tmp_dato.anterior
-                    tmp_dato = None
-                    break
                     tmp_dato = tmp_dato.siguiente
             tmp = tmp.siguiente
+        print("No se ha encontrado la fecha especificada (eliminar - matriz)")
+
 
     def buscar_dato(self,posx,posy):
         tmp = self.cabeceras_filas.primero
