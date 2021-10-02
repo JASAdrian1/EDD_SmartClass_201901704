@@ -16,12 +16,21 @@ class lista_tarea:
             tmp = self.primero
             while tmp.siguiente is not None:
                 tmp = tmp.siguiente
-
             aux = tmp
             tmp.siguiente = nuevo_nodo
             nuevo_nodo.anterior = aux
 
 
+    def modificar(self,tarea,id):
+        contador = 0
+        if self.primero is not None:
+            tmp = self.primero
+            while tmp is not None:
+                contador+=1
+                if contador == id:
+                    tmp.tarea = tarea
+                    print("La tarea se ha modificado exitosamente")
+                tmp = tmp.siguiente
 
 
     def eliminar(self,id):

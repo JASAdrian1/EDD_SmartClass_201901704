@@ -35,11 +35,11 @@ class lista_anios:
                 tmp.meses.insertar(nuevo_mes)
             tmp = tmp.siguiente
 
-    def insertar_tarea(self, no_anio, no_mes, tarea):
+    def insertar_tarea(self, no_anio, no_mes, tarea,tipo_operacion = None,id_tarea=None):
         tmp = self.primero
         while tmp is not None:
             if no_anio == tmp.anio.no_anio:
-                tmp.meses.insertar_tarea(no_mes, tarea)
+                tmp.meses.insertar_tarea(no_mes, tarea,tipo_operacion,id_tarea)
             tmp = tmp.siguiente
 
     def buscar_tarea(self, no_anio, no_mes, tarea):

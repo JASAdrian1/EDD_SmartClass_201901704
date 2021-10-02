@@ -24,12 +24,12 @@ class lista_mes:
                 tmp.siguiente = nuevo_nodo
                 tmp.anterior = aux
 
-    def insertar_tarea(self,mes,tarea):
+    def insertar_tarea(self,mes,tarea,tipo_operacion=None,id_tarea=None):
         tmp = self.primero
         while tmp is not None:
             if mes == tmp.mes.no_mes:
                 #print(tarea.materia)
-                tmp.matriz_tareas.insertar(tarea,tarea.hora,tarea.dia)
+                tmp.matriz_tareas.insertar(tarea,tarea.hora,tarea.dia,tipo_operacion,id_tarea)
             tmp = tmp.siguiente
 
     def graficar_matriz_dispersa(self,mes):

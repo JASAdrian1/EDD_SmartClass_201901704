@@ -82,24 +82,44 @@ class Arbol_avl:
 
 
     def eliminar_estudiante(self,carnet,raiz):
+        raiz_anterior = None
         if raiz is not None:
-            #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
-            if str(raiz.estudiante.carnet) == str(carnet):
-                if raiz.derecha is None and raiz.izquierda is None:
-                    print(raiz.estudiante.carnet)
-                    raiz = None
-                    print("Se ha eliminado al usuario")
-                    return raiz
-                elif raiz.derecha is None and raiz.izquierda is not None:
-                    raiz = raiz.izquierda
-                    raiz.izquierda = None
-                    print("Se ha modificado al usuario")
-                    return raiz
-                elif raiz.izquierda is None and raiz.derecha is not None:
-                    raiz = raiz.derecha
-                    raiz.derecha = None
-                    print("Se ha modificado al usuario")
-                    return raiz
+            if raiz.derecha is not None:
+                #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+                if str(raiz.derecha.estudiante.carnet) == str(carnet):
+                    tmp = raiz.derecha
+                    if tmp.derecha is None and tmp.izquierda is None:
+                        raiz.derecha = None
+                        print("Se ha eliminado al usuario", raiz.estudiante.carnet)
+                        return
+                    elif tmp.derecha is None and tmp.izquierda is not None:
+                        raiz.derecha = tmp.izquierda
+                        tmp.izquierda = None
+                        print("Se ha eliminado al usuario", raiz.estudiante.carnet)
+                        return
+                    elif tmp.izquierda is None and tmp.derecha is not None:
+                        raiz.derecha = tmp.derecha
+                        tmp.derecha = None
+                        print("Se ha eliminado al usuario", raiz.estudiante.carnet)
+                        return
+            if raiz.izquierda is not None:
+                # print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
+                if str(raiz.derecha.estudiante.carnet) == str(carnet):
+                    tmp = raiz.izquierda
+                    if tmp.derecha is None and tmp.izquierda is None:
+                        raiz.derecha = None
+                        print("Se ha eliminado al usuario", raiz.estudiante.carnet)
+                        return
+                    elif tmp.derecha is None and tmp.izquierda is not None:
+                        raiz.derecha = tmp.izquierda
+                        tmp.izquierda = None
+                        print("Se ha eliminado al usuario", raiz.estudiante.carnet)
+                        return
+                    elif tmp.izquierda is None and tmp.derecha is not None:
+                        raiz.derecha = tmp.derecha
+                        tmp.derecha = None
+                        print("Se ha eliminado al usuario", raiz.estudiante.carnet)
+                        return
             self.eliminar_estudiante(carnet, raiz.izquierda)
             self.eliminar_estudiante(carnet, raiz.derecha)
 
@@ -168,14 +188,16 @@ class Arbol_avl:
             self.insertar_mes(carnet, raiz.izquierda,no_anio,no_mes)
             self.insertar_mes(carnet, raiz.derecha,no_anio,no_mes)
 
-    def insertar_tarea(self,carnet,raiz,no_anio,no_mes, tarea):
+    def insertar_tarea(self,carnet,raiz,no_anio,no_mes, tarea,tipo_operacion=False,id_tarea=-1):
         if raiz is not None:
             #print(str(raiz.estudiante.carnet)+" == "+ str(carnet))
             if str(raiz.estudiante.carnet) == str(carnet):
                 #print(tarea.materia)
-                raiz.estudiante.lista_de_anios.insertar_tarea(no_anio,no_mes,tarea)
-            self.insertar_tarea(carnet, raiz.izquierda,no_anio,no_mes,tarea)
-            self.insertar_tarea(carnet, raiz.derecha,no_anio,no_mes,tarea)
+                raiz.estudiante.lista_de_anios.insertar_tarea(no_anio,no_mes,tarea,tipo_operacion,id_tarea)
+            self.insertar_tarea(carnet, raiz.izquierda,no_anio,no_mes,tarea,tipo_operacion,id_tarea)
+            self.insertar_tarea(carnet, raiz.derecha,no_anio,no_mes,tarea,tipo_operacion,id_tarea)
+
+
 
     def insertar_semestre(self,carnet,raiz,no_anio,no_semestre):
         if raiz is not None:

@@ -10,21 +10,25 @@ class matriz:
         self.cabeceras_columnas = lista_cabecera()
 
 
-    def insertar(self,tarea,posx,posy):
-        if self.cabeceras_filas is not None and self.cabeceras_columnas is not None:
-            nodo_cabecera_x = self.cabeceras_filas.buscarEncabezado(posx)
-            nodo_cabecera_y = self.cabeceras_columnas.buscarEncabezado(posy)
+    def insertar(self,tarea,posx,posy,tipo_operacion=None,id_tarea=None):
+        #Validacion hecha para determinar si la operacion es insercion o modificacion
+        if tipo_operacion is True:
+            self.modificar_tarea(tarea,posx,posy,id_tarea)
+        else:
+            if self.cabeceras_filas is not None and self.cabeceras_columnas is not None:
+                nodo_cabecera_x = self.cabeceras_filas.buscarEncabezado(posx)
+                nodo_cabecera_y = self.cabeceras_columnas.buscarEncabezado(posy)
 
-        if nodo_cabecera_x == None:
-            nodo_cabecera_x = nodo_cabecera(posx)
-            self.cabeceras_filas.insertar(nodo_cabecera_x)
+            if nodo_cabecera_x == None:
+                nodo_cabecera_x = nodo_cabecera(posx)
+                self.cabeceras_filas.insertar(nodo_cabecera_x)
 
-        if nodo_cabecera_y == None:
-            nodo_cabecera_y = nodo_cabecera(posy)
-            self.cabeceras_columnas.insertar(nodo_cabecera_y)
+            if nodo_cabecera_y == None:
+                nodo_cabecera_y = nodo_cabecera(posy)
+                self.cabeceras_columnas.insertar(nodo_cabecera_y)
 
-        nodo_cabecera_x.lista_interna.insertarx(tarea,posx,posy)
-        nodo_cabecera_y.lista_interna.insertary(tarea, posx, posy)
+            nodo_cabecera_x.lista_interna.insertarx(tarea,posx,posy)
+            nodo_cabecera_y.lista_interna.insertary(tarea, posx, posy)
 
     def eliminar(self,posx,posy,id):
         print("Se elimino tarea en dia: ",posy," y hora: ",posx)
@@ -43,6 +47,22 @@ class matriz:
             tmp = tmp.siguiente
         print("No se ha encontrado la fecha especificada (eliminar - matriz)")
 
+
+    def modificar_tarea(self,tarea,posx,posy,id):
+        print("Se modifico la tarea en dia: ", posy, " y hora: ", posx)
+        tmp = self.cabeceras_filas.primero
+        while tmp is not None:
+            # print(type(posx),type(tmp.id),sep="\n")
+            if str(posx) == tmp.id:
+                tmp_dato = tmp.lista_interna.primero
+                while tmp_dato is not None:
+                    #print(posy, " == ", tmp_dato.posy)
+                    if str(tmp_dato.posy) == str(posy):
+                        tmp_dato.tareas.modificar(tarea,id)
+                        return
+                    tmp_dato = tmp_dato.siguiente
+            tmp = tmp.siguiente
+        print("No se ha encontrado la fecha especificada (modificar_tarea - matriz)")
 
     def buscar_dato(self,posx,posy):
         tmp = self.cabeceras_filas.primero

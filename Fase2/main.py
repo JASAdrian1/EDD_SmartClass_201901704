@@ -150,8 +150,27 @@ def eliminar_tarea():
     no_mes = fecha.split("/")[1]
     dia = fecha.split("/")[0]
     arbol_estudiantes.eliminar_tarea(carnet,arbol_estudiantes.raiz,no_anio,no_mes,dia,hora,id)
-
     return {'Mensaje':'Se ha eliminado la tarea correctamente'}
+
+#Modificar recordatorio
+@app.route("/recordatorios",methods=['UPDATE'])
+def modificar_recordatorio():
+    global arbol_estudiantes
+    carnet = request.json['Carnet']
+    nombre = request.json['Nombre']
+    descripcion = request.json['Descripcion']
+    materia = request.json['Materia']
+    fecha = request.json['Fecha']
+    hora = request.json['Hora']
+    estado = request.json['Estado']
+    id = request.json['id']
+    no_anio = fecha.split("/")[2]
+    no_mes = fecha.split("/")[1]
+    dia = fecha.split("/")[0]
+    nueva_tarea = tarea.tarea(carnet, nombre, descripcion, materia, estado, fecha, no_anio, no_mes, dia, hora)
+    tipo_operacion = True
+    arbol_estudiantes.insertar_tarea(carnet, arbol_estudiantes.raiz, no_anio, no_mes, nueva_tarea,tipo_operacion,id)
+    return {"Mensaje":"El recordatorio ha sido modificado exitosamente"}
 
 #*********METODOS PARA TAREAS******************
 @app.route("/cursosEstudiante",methods=['POST'])
