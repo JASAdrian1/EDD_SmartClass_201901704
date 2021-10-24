@@ -53,7 +53,7 @@ matriz_tareas.eliminar(tarea12.hora,tarea12.dia,2)
 matriz_tareas.buscar_dato(tarea4.hora,tarea4.dia)
 matriz_tareas.get_informacion_tareas(tarea11.dia,tarea11.hora)
 matriz_tareas.graficar_tareas(tarea12.dia,tarea12.hora)
-#matriz_tareas.graficar_matriz()
+matriz_tareas.graficar_matriz()
 #matriz_tareas.imprimir_matriz()
 
 
