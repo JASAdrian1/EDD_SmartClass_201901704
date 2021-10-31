@@ -1,0 +1,9 @@
+digraph arbol {
+ rankdir="LR"n34[label="34 - Mate"];
+n777[label="777 - Compiladores"];
+n772[label="772 - EDD"];
+n114[label="114 - Basica 2"];
+n890[label="890 - IO"];
+n114 -> n777
+n890 -> n34
+}

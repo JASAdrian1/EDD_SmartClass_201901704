@@ -1,4 +1,7 @@
+from graphviz import Source
+
 from Apuntes.nodo_hash import Nodo_Hash
+from Apuntes.lista_apunte import Lista_apunte
 
 class Tabla_Hash:
     def __init__(self):
@@ -11,15 +14,19 @@ class Tabla_Hash:
     def insertar(self,id,apunte):
         if type(id) == str:
             id = int(id)
-        nuevo_nodo = Nodo_Hash(id,apunte)
         indice = self.calcular_clave(id)
         if self.claves[indice-1] == None:
+            nuevo_nodo = Nodo_Hash(id, apunte)
             self.claves[indice-1] = nuevo_nodo
             self.claves_usadas+=1
         else:
-            nuevo_indice = self.resolver_colision(indice)
-            self.claves[nuevo_indice-1] = nuevo_nodo
-            self.claves_usadas+=1
+            if id == self.claves[indice-1].id:
+                self.claves[indice -1 ].apuntes.insertar(id,apunte)
+            else:
+                nuevo_nodo = Nodo_Hash(id, apunte)
+                nuevo_indice = self.resolver_colision(indice)
+                self.claves[nuevo_indice-1] = nuevo_nodo
+                self.claves_usadas+=1
 
         #print(self.claves_usadas)
         #print(self.tam_tabla)
@@ -63,7 +70,11 @@ class Tabla_Hash:
 
         for i in range(0, len(claves_aux),1):
             if claves_aux[i] != None:
-                self.insertar(claves_aux[i].id,claves_aux[i].apunte)
+                tmp = claves_aux[i].apuntes.primero
+                while tmp is not None:
+                    self.insertar(claves_aux[i].id, tmp.apunte)
+                    tmp = tmp.siguiente
+
 
 
 
@@ -83,6 +94,58 @@ class Tabla_Hash:
     def recorrer_tabla(self):
         for nodo in self.claves:
             if nodo != None:
-                print("Carnet: ",nodo.id,"   Titulo: ",nodo.apunte.titulo)
+                print("Carnet: ",nodo.id,"   Titulo: ",end="")
+                tmp = nodo.apuntes.primero
+
+                while tmp is not None:
+                    print(tmp.apunte.titulo,end=", ")
+                    tmp = tmp.siguiente
+                print()
             else:
                 print("Vacio")
+
+
+    def graficar_apuntes(self):
+        texto = "digraph D{\n"
+        texto += "tabla [\nshape=plaintext\n"
+        texto += "label=<\n"
+        texto +="<table border='1' cellborder='1'>\n"
+        texto +="<tr><td colspan='"+str(len(self.claves))+"'>Apuntes</td></tr>\n"
+        texto += "<tr>\n"
+        for nodo in self.claves:
+            contador = 0
+            if nodo != None:
+                texto +="<td port='"+str(nodo.id)+"'>"+str(nodo.id)+"</td>\n"
+            else:
+                texto += "<td>Vacio</td>"
+        texto += "</tr>"
+
+        #texto +="}\n"
+        texto +="</table>\n"
+        texto +=">];\n"
+        for nodo in self.claves:
+            if nodo is not None:
+                texto += "a_" + str(nodo.id) + " [shape=plaintext\n"
+                texto += "label=<\n"
+                texto += "<table border='1'>\n"
+                tmp = nodo.apuntes.primero
+                contador_apuntes = 0
+                while tmp is not None:
+                    texto += "<tr>\n"
+                    texto+="<td>"+tmp.apunte.titulo+"</td>"
+                    contador_apuntes += 1
+                    tmp = tmp.siguiente
+                    texto += "</tr>\n"
+                texto+="</table>>];\n"
+
+        for nodo in self.claves:
+            if nodo is not None:
+
+                texto += "tabla:"+str(nodo.id)+" ->" +"a_"+str(nodo.id)+";\n"
+
+        texto+="}"
+        archivo = open("grafica_apuntes.dot", "w+")
+        archivo.write(texto)
+        archivo.close()
+        s = Source.from_file("grafica_apuntes.dot")
+        s.view()

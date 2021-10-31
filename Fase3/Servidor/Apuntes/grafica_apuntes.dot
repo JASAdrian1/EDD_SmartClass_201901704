@@ -1,0 +1,92 @@
+digraph D{
+tabla [
+shape=plaintext
+label=<
+<table border='1' cellborder='1'>
+<tr><td colspan='17'>Apuntes</td></tr>
+<tr>
+<td port='515151541'>515151541</td>
+<td>Vacio</td><td port='223215222'>223215222</td>
+<td port='661655984'>661655984</td>
+<td port='516168845'>516168845</td>
+<td>Vacio</td><td>Vacio</td><td port='255888555'>255888555</td>
+<td port='846510104'>846510104</td>
+<td>Vacio</td><td>Vacio</td><td>Vacio</td><td>Vacio</td><td port='201901704'>201901704</td>
+<td port='201955254'>201955254</td>
+<td port='215615112'>215615112</td>
+<td port='141774747'>141774747</td>
+</tr></table>
+>];
+a_515151541 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto analisis</td></tr>
+</table>>];
+a_223215222 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto orga</td></tr>
+</table>>];
+a_661655984 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto ipc</td></tr>
+</table>>];
+a_516168845 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto lfp</td></tr>
+</table>>];
+a_255888555 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto estadistica</td></tr>
+</table>>];
+a_846510104 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyectdddddddddddddddddddddddddddddddddddddddddddddddddddddo io</td></tr>
+</table>>];
+a_201901704 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto edd</td></tr>
+</table>>];
+a_201955254 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto psico</td></tr>
+</table>>];
+a_215615112 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto compi</td></tr>
+</table>>];
+a_141774747 [shape=plaintext
+label=<
+<table border='1'>
+<tr>
+<td>Proyecto teo</td></tr>
+<tr>
+<td>Presentacion io</td></tr>
+</table>>];
+tabla:515151541 ->a_515151541;
+tabla:223215222 ->a_223215222;
+tabla:661655984 ->a_661655984;
+tabla:516168845 ->a_516168845;
+tabla:255888555 ->a_255888555;
+tabla:846510104 ->a_846510104;
+tabla:201901704 ->a_201901704;
+tabla:201955254 ->a_201955254;
+tabla:215615112 ->a_215615112;
+tabla:141774747 ->a_141774747;
+}

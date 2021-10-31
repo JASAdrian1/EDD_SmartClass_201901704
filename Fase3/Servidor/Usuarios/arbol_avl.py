@@ -85,7 +85,7 @@ class Arbol_avl:
 
     def buscar_usuario(self,id,password,raiz):
         if raiz is not None:
-            #print((raiz.usuario.id)+" == "+ str(id)+"   "+str(raiz.usuario.password) + " == "+ str(password))
+            print((raiz.usuario.id)+" == "+ str(id)+"   "+str(raiz.usuario.password) + " == "+ str(password))
             if str(raiz.usuario.id) == str(id) and str(raiz.usuario.password) == str(password):
                 print("id: "+str(id)+" se ha logeado")
                 self.validacion_login = raiz.usuario   #Si se encuentra al usuario se retorna ese mismo usuario
@@ -218,9 +218,9 @@ class Arbol_avl:
             self.graficar_arbol_cursos(id, raiz.derecha,no_anio,no_semestre)
 
 
-    def imprimir_lista(self, raiz):
+    def imprimir_usuarios(self, raiz):
         if raiz is not None:
             print("-----------------------------------------------------------------")
             print(raiz.usuario.id)
-            self.imprimir_lista(raiz.izquierda)
-            self.imprimir_lista(raiz.derecha)
+            self.imprimir_usuarios(raiz.izquierda)
+            self.imprimir_usuarios(raiz.derecha)

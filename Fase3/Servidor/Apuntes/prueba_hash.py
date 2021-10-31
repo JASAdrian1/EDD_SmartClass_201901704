@@ -4,8 +4,9 @@ import tabla_hash
 tabla = tabla_hash.Tabla_Hash()
 
 apunte1 = Apunte(201901704,"Proyecto edd","Tengo que terminar el proyecto :c")
+apunte11 = Apunte(201901704,"Presentacion io","Tengo que terminar el proyecto :c")
 apunte2 = Apunte(215615112,"Proyecto compi","Tengo que terminar el proyecto :c")
-apunte3 = Apunte(846510104,"Proyecto io","Tengo que terminar el proyecto :c")
+apunte3 = Apunte(846510104,"Proyectdddddddddddddddddddddddddddddddddddddddddddddddddddddo io","Tengo que terminar el proyecto :c")
 apunte4 = Apunte(516168845,"Proyecto lfp","Tengo que terminar el proyecto :c")
 apunte5 = Apunte(661655984,"Proyecto ipc","Tengo que terminar el proyecto :c")
 apunte6 = Apunte(255888555,"Proyecto estadistica","Tengo que terminar el proyecto :c")
@@ -24,6 +25,8 @@ tabla.insertar(223215222,apunte7)
 tabla.insertar(201955254,apunte8)
 tabla.insertar(515151541,apunte9)
 tabla.insertar(141774747,apunte10)
+tabla.insertar(141774747,apunte11)
 
 tabla.recorrer_tabla()
+tabla.graficar_apuntes()
 

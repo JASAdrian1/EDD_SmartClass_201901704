@@ -14,33 +14,20 @@ class Usuario:
 
 
 def cargarEstudiantes(texto, arbol_estudiantes):
+    for key in list(texto):
+        if key == "estudiantes":
+            texto = texto["estudiantes"]
+            for estudiante in texto:
+                print(estudiante["carnet"])
+                carnet = estudiante["carnet"]
+                dpi = estudiante["DPI"]
+                nombre = estudiante["nombre"]
+                carrera = estudiante["carrera"]
+                correo = estudiante["correo"]
+                password = estudiante["password"]
+                edad = estudiante["edad"]
+                nuevoEstudiante = Usuario(str(carnet), str(dpi), nombre, carrera,correo, str(password), edad,"usuario")
+                arbol_estudiantes.insertar(nuevoEstudiante, nuevoEstudiante.id)
+                print("Se inserto ", nuevoEstudiante.id)
 
-    for item in texto:
-        if item['type'] == "user":
-            for atributo in item['atributos']:
-                try:
-                    for key in list(atributo):
-                        if key == "Carnet":
-                            carnet = atributo['Carnet']
-                        elif key == "DPI":
-                            dpi = atributo['DPI']
-                        elif key == "Nombre":
-                            nombre = atributo['Nombre']
-                        elif key == "Carrera":
-                            carrera = atributo['Carrera']
-                        elif key == "Password":
-                            password = atributo['Password']
-                        elif key == "Creditos":
-                            creditos = atributo['Creditos']
-                        elif key == "Edad":
-                            edad = atributo['Edad']
-                except:
-                    print(atributo)
-                    print("La estructura de este estudiante no era la correcta")
-            nuevoEstudiante = Usuario(carnet[1:-1], dpi[1:-1], nombre[1:-1], carrera[1:-1], password[1:-1],
-                                         creditos, edad)
-            arbol_estudiantes.insertar(nuevoEstudiante, nuevoEstudiante.carnet)
-
-    # arbol_estudiantes.preorden(arbol_estudiantes.raiz)
-    # arbol_estudiantes.graficar()
 

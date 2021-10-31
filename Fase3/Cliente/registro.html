@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="register">
+        <div class="row d-flex justify-content-center">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">¡Crea un nuevo usuario!</h3>
+                    <div class="row register-form">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" id="carnet" class="form-control" placeholder="Carnet" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="nombre" class="form-control" placeholder="Nombre" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="dpi" class="form-control" placeholder="DPI" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="carrera" class="form-control" placeholder="Carrera" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="correo" class="form-control" placeholder="Correo" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" class="form-control"  placeholder="Contraseña" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="edad" class="form-control" placeholder="Edad" value="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btnRegister" onclick="location.href = './login.html'">
+                    Iniciar sesion
+                </button>
+                <button class="btnRegister" onclick="registrar()">
+                    Registrarse
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src=""></script>
+    <script>
+        function registrar(){
+            var request = new XMLHttpRequest();
+            request.responseType = 'json';
+            request.open('POST','http://localhost:3000/registro/');
+            request.setRequestHeader('Content-type', 'application/json, charset=utf-8');
+            let carnet=document.getElementById("carnet").value;
+            let nombre=document.getElementById("nombre").value;
+            let dpi=document.getElementById("dpi").value;
+            let carrera=document.getElementById("carrera").value;
+            let correo=document.getElementById("correo").value;
+            let password=document.getElementById("password").value;
+            let edad=document.getElementById("edad").value;
+            let json =JSON.stringify({
+                carnet:carnet,
+                nombre:nombre,
+                dpi:dpi,
+                correo:correo,
+                password:password,
+                carrera:carrera,
+                edad:edad
+                })
+            request.send(json);
+            request.onreadystatechange=(e)=>{
+                let respuesta = request.response;
+                console.log(respuesta);
+            }
+            
+         }
+    </script>
+</body>
+</html>
