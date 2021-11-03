@@ -1,0 +1,14 @@
+digraph arbol {
+n20210000001[label= "20210000001\njorge\ning. ciencias y sistemas" shape="rectangle"];
+nadmin[label= "admin\nadmin\nadmin" shape="rectangle"];
+n11111[label= "11111\nLuis\ning. ciencias y sistemas" shape="rectangle"];
+n20210000003[label= "20210000003\njuan\ning. ciencias y sistemas" shape="rectangle"];
+n20210000002[label= "20210000002\nCarlos\ning. ciencias y sistemas" shape="rectangle"];
+n20210000004[label= "20210000004\nLuis\ning. ciencias y sistemas" shape="rectangle"];
+
+n20210000001 -> nadmin
+n20210000001 -> n20210000003
+nadmin -> n11111
+n20210000003 -> n20210000002
+n20210000003 -> n20210000004
+}

@@ -104,6 +104,20 @@ class Tabla_Hash:
             else:
                 print("Vacio")
 
+    def get_apuntes_usuario(self,id):
+        apuntes = []
+        for nodo in self.claves:
+            if nodo != None:
+                print(type(id),"    ",type(nodo.id))
+                print(id," == ",nodo.id)
+                if id == str(nodo.id):
+                    tmp = nodo.apuntes.primero
+                    while tmp is not None:
+                        apuntes.append([tmp.apunte.titulo,tmp.apunte.apunte])
+                        tmp = tmp.siguiente
+                    return apuntes
+
+        print("No se ha encontrado el usuario para poder retornar sus apuntes")
 
     def graficar_apuntes(self):
         texto = "digraph D{\n"
@@ -144,8 +158,9 @@ class Tabla_Hash:
                 texto += "tabla:"+str(nodo.id)+" ->" +"a_"+str(nodo.id)+";\n"
 
         texto+="}"
-        archivo = open("grafica_apuntes.dot", "w+")
+        """archivo = open("grafica_apuntes.dot", "w+")
         archivo.write(texto)
         archivo.close()
         s = Source.from_file("grafica_apuntes.dot")
-        s.view()
+        s.view()"""
+        return texto

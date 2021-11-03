@@ -16,6 +16,15 @@
     padding: 10%;
     margin-top: 10%;
 }
+.btnApuntes{
+    float: left;
+    cursor: pointer;
+    background: #0062cc;
+    color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    font-weight: 600;
+}
 .btnRegister{
     float: right;
     margin-top: 10%;

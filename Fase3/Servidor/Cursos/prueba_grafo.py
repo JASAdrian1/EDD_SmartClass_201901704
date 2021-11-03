@@ -10,6 +10,7 @@ grafo.insertar(114,"Basica 2")
 grafo.insertar(890,"IO")
 
 grafo.asociar_nodo(890,34,"Mate")
+grafo.asociar_nodo(890,777,"Compiladores")
 grafo.asociar_nodo(114,777,"Compiladores")
 
 grafo.graficar_grafo()

@@ -19,19 +19,22 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-item nav-link active">Reporte usuarios</a>
+                        <a class="nav-item nav-link active" onclick="graficarReportes('reporteUsuarios')">Reporte usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-item nav-link active">Reporte apuntes</a>
+                        <a class="nav-item nav-link active " onclick="graficarReportes('reporteApuntes')">Reporte apuntes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-item nav-link active">Reporte cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item nav-link active" onclick="graficarReportes('reportePensum')">Pensum</a>
                     </li>
                     <li>
                         <form>
                           <div class="form-group">
                             <label for="arcvhioCarga">Carga masiva</label>
-                            <input type="file" class="form-control-file" id="arcvhioCarga">
+                            <input type="file" class="form-control-file" id="archivoCarga">
                           </div>
                         </form>
                     </li>
@@ -42,10 +45,10 @@
                             Tipo de carga
                           </a>
                           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#" onclick="cargarArchivo()">Estudiantes</a></li>
-                            <li><a class="dropdown-item" href="#">Cursos pensum</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="cargarArchivo('estudiante')">Estudiantes</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="cargarArchivo('pensum')">Cursos pensum</a></li>
                             <li><a class="dropdown-item" href="#">Cursos estudiantes</a></li>
-                            <li><a class="dropdown-item" href="#">Apuntes estudiantes</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="cargarArchivo('apunte')">Apuntes estudiantes</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -53,13 +56,17 @@
                 </ul>
             </div>
         </div>
-        
     </nav>
+    
+    <div id="grafica" style="text-align: center;"></div>
    
     
+    
+    
+    
     <script>
-        function cargarArchivo(){
-              var archivo = document.getElementById("arcvhioCarga").files[0];
+        function cargarArchivo(tipoCarga){
+              var archivo = document.getElementById("archivoCarga").files[0];
               var fileReader = new FileReader();
               fileReader.onload = function(fileLoadedEvent){
                  var textoArchivo = fileLoadedEvent.target.result;
@@ -72,7 +79,13 @@
                             //document.getElementById("consola").innerHTML = resupuesta.resultado;
                         }
                     }
-                    request.open('POST','http://localhost:3000/cargaUsuarios',true);
+                    if(tipoCarga == "estudiante"){
+                        request.open('POST','http://localhost:3000/admin/cargarUsuarios',true);
+                    }else if(tipoCarga == "apunte"){
+                        request.open('POST','http://localhost:3000/admin/cargarApuntes',true);
+                    }else if(tipoCarga == "pensum"){
+                        request.open('POST','http://localhost:3000/admin/cargarPensum',true);
+                    }
                     request.setRequestHeader('Content-type', 'application/json');
                     let json =JSON.stringify({
                                 contenido:textoArchivo
@@ -84,8 +97,52 @@
         }
     </script>
     <script>
-    
+        function graficarUsuarios(){
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+            if (request.readyState == XMLHttpRequest.DONE) {
+                let resupuesta = request.responseText;
+                resupuesta = JSON.parse(resupuesta)
+                console.log(resupuesta.resultado);
+                d3.select("#grafica").graphviz()
+                    .renderDot(resupuesta.grafica);
+            }
+            }
+            request.open('GET','http://localhost:3000/admin/graficarUsuarios',true);
+            request.setRequestHeader('Content-type', 'application/json');
+            request.send(null);
+            }
     </script>
+    <script>
+        
+    </script>
+    <script>
+        function graficarReportes(tipoReporte){
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+            if (request.readyState == XMLHttpRequest.DONE) {
+                let resupuesta = request.responseText;
+                resupuesta = JSON.parse(resupuesta)
+                console.log(resupuesta.resultado);
+                d3.select("#grafica").graphviz()
+                    .renderDot(resupuesta.grafica);
+            }
+            }
+            if(tipoReporte == "reporteUsuarios"){
+                request.open('GET','http://localhost:3000/admin/graficarUsuarios',true);
+            }else if(tipoReporte == "reporteApuntes"){
+                request.open('GET','http://localhost:3000/admin/graficarApuntes',true);
+            }else if(tipoReporte == "reportePensum"){
+                request.open('GET','http://localhost:3000/admin/graficarPensum',true);
+            }
+            
+            request.setRequestHeader('Content-type', 'application/json');
+            request.send(null);
+        }
+    </script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
      
 </body>

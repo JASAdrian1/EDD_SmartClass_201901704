@@ -144,6 +144,48 @@ class Arbol_avl:
         self.modifiar_usuario(nuevo_usuario.id,nuevo_usuario,self.raiz)
 
 
+    def graficar(self):
+        cadena = "digraph arbol {\n"
+        if (self.raiz != None):
+            cadena += self.listar(self.raiz)
+            cadena += "\n"
+            cadena += self.enlazar(self.raiz)
+        cadena += "}"
+        """nombre_archivo = r'graficaEstudiantes.dot'
+                Archivo = open(nombre_archivo, "w+")
+                Archivo.write(cadena)
+                Archivo.close()
+                try:
+                    s = Source.from_file(nombre_archivo)
+                    s.view()
+                except:
+                    print("Por favor cierre el archivo de la grafica y vuelva a realizar la peticion")"""
+        return cadena
+
+
+    def listar(self, raiz_actual):
+        if raiz_actual:
+            cadena = "n" + str(raiz_actual.usuario.id) + "[label= \"" + str(raiz_actual.usuario.get_informacion()) + "\" shape=\"rectangle\"];\n"
+            cadena += self.listar(raiz_actual.izquierda)
+            cadena += self.listar(raiz_actual.derecha)
+            return cadena
+        else:
+            return ""
+
+    def enlazar(self, raiz_actual):
+        cadena = ""
+        if raiz_actual:
+            if raiz_actual.izquierda:
+                cadena += "n" + str(raiz_actual.usuario.id) + " -> n" + str(raiz_actual.izquierda.usuario.id) + "\n"
+            if raiz_actual.derecha:
+                cadena += "n" + str(raiz_actual.usuario.id) + " -> n" + str(raiz_actual.derecha.usuario.id) + "\n"
+
+            cadena += self.enlazar(raiz_actual.izquierda)
+            cadena += self.enlazar(raiz_actual.derecha)
+
+        return cadena
+
+
 
     def buscar_por_id(self,id,raiz):
         if raiz is not None:

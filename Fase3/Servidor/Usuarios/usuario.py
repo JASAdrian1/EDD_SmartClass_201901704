@@ -12,6 +12,11 @@ class Usuario:
         self.edad = edad
         self.rol = rol
 
+    def get_informacion(self):
+        informacion = self.id+"\\n"
+        informacion += self.nombre + "\\n"
+        informacion += self.carrera
+        return informacion
 
 def cargarEstudiantes(texto, arbol_estudiantes):
     for key in list(texto):

@@ -1,5 +1,7 @@
 import os
 
+from graphviz import Source
+
 from Cursos.nodo_grafo import Nodo_grafo
 
 class Grafos_cursos:
@@ -15,6 +17,7 @@ class Grafos_cursos:
         else:
             self.ultimo.siguiente = nuevo_nodo
             self.ultimo = nuevo_nodo
+
 
     def asociar_nodo(self,id,adyacente,curso_adyacente):
         nodo = self.buscar_nodo(id)
@@ -39,18 +42,14 @@ class Grafos_cursos:
         texto = "digraph arbol {\n rankdir=\"LR\""
         tmp = self.primero
         while tmp is not None:
-            texto+= "n"+str(tmp.id)+'[label="'+str(tmp.id)+' - '+str(tmp.curso)+'"];\n'
+            texto+= "n"+str(tmp.id)+'[label="'+str(tmp.id)+' - '+str(tmp.curso.nombre)+'"];\n'
             tmp = tmp.siguiente
         tmp = self.primero
         while tmp is not None:
             subtmp = tmp.lista_adyacentes.primero
             while subtmp is not None:
-                print("AAAAAAAAAAAAaa")
                 texto += "n" + str(tmp.id) + " -> n" + str(subtmp.id) + "\n"
                 subtmp = subtmp.siguiente
             tmp = tmp.siguiente
         texto += "}"
-        archivo = open("grafica_cusos.dot", "w+")
-        archivo.write(texto)
-        archivo.close()
-        os.system("fdp -Tpng -o graph-g.png ejemplo.dot")
+        return texto

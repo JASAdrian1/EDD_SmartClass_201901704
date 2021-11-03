@@ -1,0 +1,26 @@
+digraph arbol {
+ rankdir="LR"n101[label="101 - Matemática Básica 1"];
+n039[label="039 - Deportes 1"];
+n348[label="348 - Quimica General 1"];
+n103[label="103 - Matemática Básica 2"];
+n005[label="005 - Técnicas de Estudio e Investigación"];
+n960[label="960 - Matemática Cómputo 1"];
+n107[label="107 - Mátematica Intermedia 1"];
+n770[label="770 - Introducción a la Programación y Computación 1"];
+n796[label="796 - Lenguajes Formales y de Programación"];
+n772[label="772 - Estructuras de Datos"];
+n777[label="777 - Organización de Lenguajes y Compiladores 1"];
+n018[label="018 - Filosofia de la Ciencia"];
+n774[label="774 - Sistemas de Bases de Datos 1"];
+n281[label="281 - Sistemas Operativos 1"];
+n2036[label="2036 - Práctica Intermedia"];
+n101 -> n103
+n103 -> n960
+n103 -> n107
+n103 -> n770
+n960 -> n796
+n770 -> n796
+n796 -> n772
+n796 -> n777
+n777 -> n2036
+}
