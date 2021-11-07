@@ -53,7 +53,7 @@
             Ver apuntes
         </button>
 
-   <div class="content">
+       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
@@ -62,15 +62,26 @@
                   <h4 class="card-title ">Apuntes</h4>
                 </div>
                 <div class="card-body">
-                  <div class="table-responsive" id="apuntes">
-                      
+                  <div class="tabcontent">
+                      <table class='table'>
+                          <thead class='text-primary'>
+                              <th>
+                                  Titulo
+                              </th>
+                              <th>
+                                  Contenido
+                              </th>
+                              </thead>
+                            <tbody id="apuntes">
+                          </tbody>
+                      </table>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     
     <script>
         function guardarApunte(){
@@ -99,15 +110,6 @@
     </script>
 
     <script>
-        var contenido="<table class=\'table\' id=\'apuntes\'>";
-                      contenido+="<thead class=\'text-primary\'>";
-                       contenido+= "<th>";
-                       contenido+=  "Titulo"; 
-                       contenido+= "</th>";
-                       contenido+= "<th>";
-                       contenido+=  "Contenido";  
-                       contenido+= "</th>";
-                       contenido+= "</thead>";
         function verApuntes(){
             var url_string = window.location.href
             var url = new URL(url_string);
@@ -116,6 +118,7 @@
             request.onreadystatechange = function() {
                 if (request.readyState == XMLHttpRequest.DONE) {
                     let resupuesta = JSON.parse(request.responseText)
+                    var contenido = ""
                     console.log(resupuesta);
                     console.log(resupuesta["apuntes"].length)
                     console.log(resupuesta["apuntes"])
