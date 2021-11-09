@@ -24,6 +24,7 @@ class Lista_apunte:
     def buscar_apunte(self, id):
         tmp = self.primero
         while tmp is not None:
+            print(type(id)," == ",type(tmp.id))
             if id == tmp.id:
                 return tmp
             tmp = tmp.siguiente

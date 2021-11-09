@@ -123,13 +123,13 @@
             document.getElementById("codigoCurso").innerHTML = ''
             var request = new XMLHttpRequest();
             request.onreadystatechange = function() {
-            if (request.readyState == XMLHttpRequest.DONE) {
-                let resupuesta = request.responseText;
-                resupuesta = JSON.parse(resupuesta)
-                console.log(resupuesta.resultado);
-                d3.select("#grafica").graphviz()
-                    .renderDot(resupuesta.grafica);
-            }
+                if (request.readyState == XMLHttpRequest.DONE) {
+                    let respuesta = request.responseText;
+                    respuesta = JSON.parse(respuesta)
+                    console.log(respuesta.resultado);
+                    d3.select("#grafica").graphviz()
+                        .renderDot(respuesta.grafica);
+                }
             }
             if(tipoReporte == "reporteUsuarios"){
                 request.open('GET','http://localhost:3000/admin/graficarUsuarios',true);
@@ -144,8 +144,32 @@
         }
     </script>
     <script>
+        function reportarCursos(){
+            var request = new XMLHttpRequest();
+            var codigo_curso = document.getElementById("id_curso").value;
+            console.log(codigo_curso)
+            request.onreadystatechange = function (){
+                if(request.readyState == XMLHttpRequest.DONE){
+                    let respuesta = request.responseText;
+                    respuesta = JSON.parse(respuesta)
+                    console.log(respuesta);
+                    d3.select("#grafica").graphviz()
+                    .renderDot(respuesta.grafica);
+                }
+            }
+            request.open('POST','http://localhost:3000/admin/reporteCursos',true);
+            request.setRequestHeader('Content-type', 'application/json');
+            let json =JSON.stringify({
+                        id_curso:codigo_curso
+            });
+            console.log(json)
+            request.send(json);
+        }
+    </script>
+    <script>
         function generarOpcionCursos(){
-            document.getElementById("codigoCurso").innerHTML = '<input type="text" id="edad" class="form-control" placeholder="Codigo de curso" value="" /><button>Obtener reporte</button>'
+            document.getElementById("codigoCurso").innerHTML = '<input type="text" id="id_curso" class="form-control" placeholder="Codigo de curso" value="" /><button onclick="reportarCursos()">Obtener reporte</button>'
+            document.getElementById('grafica').innerHTML = ''
         }
     </script>
     <script src="https://d3js.org/d3.v5.min.js"></script>

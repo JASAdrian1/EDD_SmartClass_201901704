@@ -106,7 +106,7 @@ def listarApuntes(user):
     global tabla_apuntes
     print(user)
     apuntes = tabla_apuntes.get_apuntes_usuario(user)
-    print("Se listó los apuntes")
+    print("Se listó los apuntes") 
     return jsonify({"apuntes":apuntes})
 
 @app.route("/admin/graficarApuntes", methods=['GET'])
@@ -132,6 +132,16 @@ def graficarPensum():
     global grafo_pensum
     grafica = grafo_pensum.graficar_grafo()
     return jsonify({"grafica":grafica})
+
+@app.route("/admin/reporteCursos", methods=['POST'])
+def reporteCursos():
+    global grafo_pensum
+    id_curso = request.json["id_curso"]
+    return jsonify({"grafica":curso.reporte_cursos(grafo_pensum,id_curso)})
+
+@app.route("/admin/cargarCursosEstudiantes", methods =['POST'])
+def cargarCursosEstudiantes():
+    global grafo_pensum
 
 if __name__=="__main__":
     import os

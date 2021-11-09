@@ -16,17 +16,25 @@ class Tabla_Hash:
             id = int(id)
         indice = self.calcular_clave(id)
         if self.claves[indice-1] == None:
-            nuevo_nodo = Nodo_Hash(id, apunte)
-            self.claves[indice-1] = nuevo_nodo
-            self.claves_usadas+=1
+            print(self.esta_ocupada(id))
+            if self.esta_ocupada(id) is False:
+                nuevo_nodo = Nodo_Hash(id, apunte)
+                self.claves[indice-1] = nuevo_nodo
+                self.claves_usadas+=1
+            else:
+                self.buscar_indice(id)
+                self.claves[self.buscar_indice(id)].apuntes.insertar(id, apunte)
         else:
             if id == self.claves[indice-1].id:
                 self.claves[indice -1 ].apuntes.insertar(id,apunte)
             else:
-                nuevo_nodo = Nodo_Hash(id, apunte)
-                nuevo_indice = self.resolver_colision(indice)
-                self.claves[nuevo_indice-1] = nuevo_nodo
-                self.claves_usadas+=1
+                if self.esta_ocupada(id) is False:
+                    nuevo_nodo = Nodo_Hash(id, apunte)
+                    nuevo_indice = self.resolver_colision(indice)
+                    self.claves[nuevo_indice-1] = nuevo_nodo
+                    self.claves_usadas+=1
+                else:
+                    self.claves[self.buscar_indice(id)].apuntes.insertar(id,apunte)
 
         #print(self.claves_usadas)
         #print(self.tam_tabla)
@@ -39,16 +47,20 @@ class Tabla_Hash:
 
 
     def calcular_clave(self,id):
-         return id % self.tam_tabla
+         return int(id) % self.tam_tabla
 
 
     def resolver_colision(self,indice):
         nuevo_indice = 0
         disponible = False
         i = 0
-
+        contador = 0
         while(disponible == False):
-            nuevo_indice = indice + pow(i,2)
+            if i>10:
+                nuevo_indice += i
+            else:
+                nuevo_indice = indice + pow(i,2)
+            #print(nuevo_indice)
             if(nuevo_indice>self.tam_tabla):
                 nuevo_indice = nuevo_indice - self.tam_tabla * (nuevo_indice//self.tam_tabla)
             #print(indice)
@@ -91,6 +103,26 @@ class Tabla_Hash:
 
         return numero_primo
 
+    def esta_ocupada(self,id):
+        for nodo in self.claves:
+            if nodo != None:
+                #print(type(id),"  ==  ",type(nodo.id))
+                #print(id," == ",nodo.id)
+                if id == nodo.id:
+                    return True
+
+        return False
+
+    def buscar_indice(self,id):
+        contador = 0
+        for nodo in self.claves:
+            if nodo != None:
+                #print(id, " == ", nodo.id)
+                if id == nodo.id:
+                    return contador
+            contador+=1
+
+
     def recorrer_tabla(self):
         for nodo in self.claves:
             if nodo != None:
@@ -108,8 +140,7 @@ class Tabla_Hash:
         apuntes = []
         for nodo in self.claves:
             if nodo != None:
-                print(type(id),"    ",type(nodo.id))
-                print(id," == ",nodo.id)
+                #print(id," == ",nodo.id)
                 if id == str(nodo.id):
                     tmp = nodo.apuntes.primero
                     while tmp is not None:

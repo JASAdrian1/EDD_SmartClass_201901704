@@ -231,25 +231,14 @@ class Arbol_avl:
 
 
 
-    def insertar_tarea(self,id,raiz,no_anio,no_mes, tarea,tipo_operacion=False,id_tarea=-1):
-        if raiz is not None:
-            #print(str(raiz.usuario.id)+" == "+ str(id))
-            if str(raiz.usuario.id) == str(id):
-                #print(tarea.materia)
-                raiz.usuario.lista_de_anios.insertar_tarea(no_anio,no_mes,tarea,tipo_operacion,id_tarea)
-            self.insertar_tarea(id, raiz.izquierda,no_anio,no_mes,tarea,tipo_operacion,id_tarea)
-            self.insertar_tarea(id, raiz.derecha,no_anio,no_mes,tarea,tipo_operacion,id_tarea)
-
-
-
-    def insertar_curso(self,id,raiz,no_anio,no_semestre,curso):
+    def insertar_curso(self,id,raiz,curso):
         if raiz is not None:
             #print(str(raiz.usuario.id)+" == "+ str(id))
             if str(raiz.usuario.id) == str(id):
                 #print("Se inserto el semestre al usuario ",id)
-                raiz.usuario.lista_de_anios.insertar_curso(no_anio,no_semestre,curso)
-            self.insertar_curso(id, raiz.izquierda,no_anio,no_semestre,curso)
-            self.insertar_curso(id, raiz.derecha,no_anio,no_semestre,curso)
+                raiz.usuario.lista_de_anios.insertar_curso(curso)
+            self.insertar_curso(id, raiz.izquierda,curso)
+            self.insertar_curso(id, raiz.derecha,curso)
 
 
     def graficar_arbol_cursos(self,id,raiz,no_anio,no_semestre):

@@ -1,5 +1,5 @@
 from Analizadores.sintactico import parser
-
+from Cursos.grafo_cursos import Grafos_cursos
 
 class Usuario:
     def __init__(self,id,dpi,nombre,carrera,correo,password,edad,rol):
@@ -11,12 +11,18 @@ class Usuario:
         self.password = password
         self.edad = edad
         self.rol = rol
+        self.cursos = Grafos_cursos()
 
     def get_informacion(self):
         informacion = self.id+"\\n"
         informacion += self.nombre + "\\n"
         informacion += self.carrera
         return informacion
+
+    def insertarCurso(self,nuevo_curso,prerequisitos,codigo,nombre_curso_actual):
+        self.cursos.insertar(nuevo_curso)
+        #for prerequisito in nuevo_curso.
+
 
 def cargarEstudiantes(texto, arbol_estudiantes):
     for key in list(texto):
@@ -25,7 +31,7 @@ def cargarEstudiantes(texto, arbol_estudiantes):
             for estudiante in texto:
                 print(estudiante["carnet"])
                 carnet = estudiante["carnet"]
-                dpi = estudiante["DPI"]
+                dpi = estudiante["dpi"]
                 nombre = estudiante["nombre"]
                 carrera = estudiante["carrera"]
                 correo = estudiante["correo"]

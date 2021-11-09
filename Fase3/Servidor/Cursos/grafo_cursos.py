@@ -33,12 +33,41 @@ class Grafos_cursos:
     def buscar_nodo(self,id):
         tmp = self.primero
         while tmp is not None:
-            if (tmp.id == id):
+            print(tmp.id," == ",id)
+            if (str(tmp.id) == str(id)):
                 return tmp
             tmp = tmp.siguiente
+        return None
 
+
+    def buscar_prerequisitos(self,id):
+        curso = self.buscar_nodo(id)
+        for prerequisito in curso.curso.prerre.split(","):
+            #print(prerequisito)
+            print(self.buscar_nodo(prerequisito))
+            if self.buscar_nodo(prerequisito) != None:
+                print("Hola?")
+                self.buscar_prerequisitos(prerequisito)
 
     def graficar_grafo(self):
+        texto = "digraph arbol {\n rankdir=\"LR\""
+        tmp = self.primero
+        while tmp is not None:
+            texto+= "n"+str(tmp.id)+'[label="'+str(tmp.id)+' - '+str(tmp.curso.nombre)+'"];\n'
+            tmp = tmp.siguiente
+        tmp = self.primero
+        while tmp is not None:
+            subtmp = tmp.lista_adyacentes.primero
+            while subtmp is not None:
+                texto += "n" + str(tmp.id) + " -> n" + str(subtmp.id) + "\n"
+                subtmp = subtmp.siguiente
+            tmp = tmp.siguiente
+        texto += "}"
+        return texto
+
+    #METODO PARA GRAFICAR LOS ARBOLES NECESARIOS PARA UN SOLO CURSO
+    def graficar_curso(self,id):
+        curso = self.buscar_nodo(id)
         texto = "digraph arbol {\n rankdir=\"LR\""
         tmp = self.primero
         while tmp is not None:

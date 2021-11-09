@@ -3,7 +3,7 @@ version: "3.9"
 services:
   cliente:
     build: ./Cliente
-    container_name: cliente_fase3_edd
+    container_name: cliente_fase3_edd_v2
     restart: always
     ports:
     - "7000:80"

@@ -1,3 +1,4 @@
+from Cursos.grafo_cursos import Grafos_cursos
 
 class Curso:
     def __init__(self,id,nombre,creditos,prerre,obligatorio):
@@ -47,13 +48,30 @@ def cargar_cursos(texto,arbol_estudiantes,grafo_cursos):
 
             for cursos in texto:
                 prerrequisitos =cursos["Prerequisitos"].split(",")
-                #print(prerrequisitos)
                 id_acutal = cursos["Codigo"]
                 nombre_actual = cursos["Nombre"]
                 for prerrequisito in prerrequisitos:
                     if prerrequisito != "":
                         curso_prerre = grafo_cursos.buscar_nodo(prerrequisito)
                         if curso_prerre is not None:
-                            #print(prerequisito)
-                            #print(curso_prerre)
                             grafo_cursos.asociar_nodo(curso_prerre.curso.id,id_acutal,nombre_actual)
+
+def reporte_cursos(cursos_pensum,id_curso):
+    curso_seleccionado = cursos_pensum.buscar_nodo(id_curso)
+    arbol_reporte = Grafos_cursos()
+    if curso_seleccionado is not None:
+        arbol_reporte.insertar(curso_seleccionado.id,curso_seleccionado.curso)
+        arbol_reporte.buscar_prerequisitos(curso_seleccionado.curso.id)
+        """hay_prerre = True
+        for if_prerre in curso_seleccionado.curso.prerre.split(","):
+            print(type(if_prerre))
+            print(if_prerre)
+            if cursos_pensum.buscar_nodo(if_prerre) != None:
+                arbol_reporte.insertar(cursos_pensum.buscar_nodo(if_prerre).id,cursos_pensum.buscar_nodo(if_prerre).curso)"""
+
+        return arbol_reporte.graficar_grafo()
+    else:
+        print("No se ha encontrado el curso seleccionado")
+
+
+
