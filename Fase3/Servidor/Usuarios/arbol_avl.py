@@ -144,10 +144,10 @@ class Arbol_avl:
         self.modifiar_usuario(nuevo_usuario.id,nuevo_usuario,self.raiz)
 
 
-    def graficar(self):
+    def graficar(self,encriptado):
         cadena = "digraph arbol {\n"
         if (self.raiz != None):
-            cadena += self.listar(self.raiz)
+            cadena += self.listar(self.raiz,encriptado)
             cadena += "\n"
             cadena += self.enlazar(self.raiz)
         cadena += "}"
@@ -163,11 +163,11 @@ class Arbol_avl:
         return cadena
 
 
-    def listar(self, raiz_actual):
+    def listar(self, raiz_actual,encriptado):
         if raiz_actual:
-            cadena = "n" + str(raiz_actual.usuario.id) + "[label= \"" + str(raiz_actual.usuario.get_informacion()) + "\" shape=\"rectangle\"];\n"
-            cadena += self.listar(raiz_actual.izquierda)
-            cadena += self.listar(raiz_actual.derecha)
+            cadena = "n" + str(raiz_actual.usuario.id) + "[label= \"" + str(raiz_actual.usuario.get_informacion(encriptado)) + "\" shape=\"rectangle\"];\n"
+            cadena += self.listar(raiz_actual.izquierda,encriptado)
+            cadena += self.listar(raiz_actual.derecha,encriptado)
             return cadena
         else:
             return ""

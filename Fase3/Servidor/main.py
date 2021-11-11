@@ -68,14 +68,20 @@ def cargarUsuarios():
     contenidoArchivo = json.loads(contenidoArchivo)
     usuario.cargarEstudiantes(contenidoArchivo,arbol_usuarios)
     arbol_usuarios.imprimir_usuarios(arbol_usuarios.raiz)
-    arbol_usuarios.graficar()
+    arbol_usuarios.graficar(True)
     print("Se han cargado los estudiantes")
     return jsonify({"Mensaje":"Se ha realizado la carga correctamente"})
 
 @app.route("/admin/graficarUsuarios", methods=['GET'])
 def graficarUsuarios():
     global arbol_usuarios
-    grafica = arbol_usuarios.graficar()
+    grafica = arbol_usuarios.graficar(True)
+    return jsonify({"grafica":grafica})
+
+@app.route("/admin/graficarUsuariosDesencriptados", methods=['GET'])
+def graficarUsuariosDesencriptados():
+    global arbol_usuarios
+    grafica = arbol_usuarios.graficar(False)
     return jsonify({"grafica":grafica})
 
 
