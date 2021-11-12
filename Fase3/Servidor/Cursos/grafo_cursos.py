@@ -33,21 +33,45 @@ class Grafos_cursos:
     def buscar_nodo(self,id):
         tmp = self.primero
         while tmp is not None:
-            print(tmp.id," == ",id)
+            #print(tmp.id," == ",id)
             if (str(tmp.id) == str(id)):
                 return tmp
             tmp = tmp.siguiente
         return None
 
+    def buscar_nodo_en_pensum(self,id,grafo_pensum):
+        tmp = grafo_pensum.primero
+        while tmp is not None:
+            #print(tmp.id," == ",id)
+            if (str(tmp.id) == str(id)):
+                return tmp
+            tmp = tmp.siguiente
+        return None
 
-    def buscar_prerequisitos(self,id):
-        curso = self.buscar_nodo(id)
+    def verificar_curso_existe(self,id):
+        tmp = self.primero
+        while tmp is not None:
+            if (str(tmp.id) == str(id)):
+                return True
+            tmp = tmp.siguiente
+        return False
+
+
+    def buscar_prerequisitos(self,id,grafo_pensum):
+        print("---------------------------------")
+        print("Codigo: ",id)
+        curso = self.buscar_nodo_en_pensum(id,grafo_pensum)
+        print("Curso: ",curso.curso.nombre)
+        print("PREREQUISITOS: ")
         for prerequisito in curso.curso.prerre.split(","):
-            #print(prerequisito)
-            print(self.buscar_nodo(prerequisito))
-            if self.buscar_nodo(prerequisito) != None:
-                print("Hola?")
-                self.buscar_prerequisitos(prerequisito)
+            print(prerequisito)
+            if prerequisito != "":
+                if self.buscar_nodo_en_pensum(prerequisito,grafo_pensum) != None:
+                    print("Hola?")
+                    if self.verificar_curso_existe(prerequisito) is False:
+                        self.insertar(prerequisito, self.buscar_nodo_en_pensum(prerequisito, grafo_pensum).curso)
+                    self.buscar_prerequisitos(prerequisito,grafo_pensum)
+
 
     def graficar_grafo(self):
         texto = "digraph arbol {\n rankdir=\"LR\""

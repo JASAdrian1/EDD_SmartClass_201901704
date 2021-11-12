@@ -61,14 +61,22 @@ def reporte_cursos(cursos_pensum,id_curso):
     arbol_reporte = Grafos_cursos()
     if curso_seleccionado is not None:
         arbol_reporte.insertar(curso_seleccionado.id,curso_seleccionado.curso)
-        arbol_reporte.buscar_prerequisitos(curso_seleccionado.curso.id)
-        """hay_prerre = True
-        for if_prerre in curso_seleccionado.curso.prerre.split(","):
-            print(type(if_prerre))
-            print(if_prerre)
-            if cursos_pensum.buscar_nodo(if_prerre) != None:
-                arbol_reporte.insertar(cursos_pensum.buscar_nodo(if_prerre).id,cursos_pensum.buscar_nodo(if_prerre).curso)"""
+        arbol_reporte.buscar_prerequisitos(curso_seleccionado.curso.id,cursos_pensum)
 
+        tmp = arbol_reporte.primero
+        while tmp is not None:
+            for prere in tmp.curso.prerre.split(","):
+                curso_prerre = arbol_reporte.buscar_nodo(prere)
+                if curso_prerre is not None:
+                    arbol_reporte.asociar_nodo(curso_prerre.curso.id, tmp.curso.id, tmp.curso.nombre)
+            tmp = tmp.siguiente
+            """hay_prerre = True
+            for if_prerre in curso_seleccionado.curso.prerre.split(","):
+                print(type(if_prerre))
+                print(if_prerre)
+                if cursos_pensum.buscar_nodo(if_prerre) != None:
+                    arbol_reporte.insertar(cursos_pensum.buscar_nodo(if_prerre).id,cursos_pensum.buscar_nodo(if_prerre).curso)"""
+        print(arbol_reporte.graficar_grafo())
         return arbol_reporte.graficar_grafo()
     else:
         print("No se ha encontrado el curso seleccionado")
